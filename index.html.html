@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recanté — Casa & Organização</title>
+<meta name="description" content="Produtos de organização para transformar cada cantinho da sua casa. Entrega rápida, qualidade garantida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+:root {
+  --escuro:    #2C1810;
+  --terra:     #8B4A2A;
+  --terra-d:   #6d3820;
+  --dourado:   #c4956a;
+  --creme:     #F7F0E6;
+  --bege:      #EFE5D5;
+  --bege-d:    #DDD0BA;
+  --cinza:     #6b5040;
+  --branco:    #ffffff;
+  --f-display: 'Cinzel', serif;
+  --f-body:    'DM Sans', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --ease:      cubic-bezier(.22,.68,0,1.2);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+}
+
+body { font-family: var(--f-body); background: var(--branco); color: var(--escuro); line-height: 1.6; overflow-x: hidden; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+/* ── TOAST NOTIFICATION (micro-interaction) ── */
+.toast {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: var(--escuro);
+  color: var(--creme);
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 999;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: transform .4s var(--ease-out), opacity .3s;
+  pointer-events: none;
+  border-left: 3px solid var(--dourado);
+  max-width: 280px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-icon { width: 8px; height: 8px; border-radius: 50%; background: var(--dourado); flex-shrink: 0; }
+
+/* ── FOMO BADGE (social proof live) ── */
+.fomo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--cinza);
+  font-style: italic;
+  font-family: var(--f-serif);
+}
+.fomo-dot { width: 6px; height: 6px; border-radius: 50%; background: #4CAF50; flex-shrink: 0; animation: pulse-green 2s infinite; }
+@keyframes pulse-green { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.3)} }
+
+/* ── ANNOUNCE BAR ── */
+.announce {
+  background: var(--escuro);
+  color: var(--dourado);
+  text-align: center;
+  padding: 9px 16px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  font-family: var(--f-display);
+  position: relative;
+  overflow: hidden;
+}
+.announce strong { color: var(--creme); }
+.announce-marquee { display: inline-block; }
+
+/* ── NAV ── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 68px;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bege);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow .3s;
+}
+.nav.scrolled { box-shadow: 0 2px 20px rgba(44,24,16,.08); }
+
+.logo { display: flex; flex-direction: column; align-items: center; gap: 1px; cursor: pointer; }
+.logo-orn { display: flex; align-items: center; gap: 5px; }
+.logo-orn .ln { width: 18px; height: .7px; background: var(--dourado); }
+.logo-orn .dm { width: 5px; height: 5px; background: var(--dourado); transform: rotate(45deg); }
+.logo-name { font-family: var(--f-display); font-size: 19px; font-weight: 400; letter-spacing: .2em; color: var(--escuro); line-height: 1; }
+.logo-sub { font-family: var(--f-display); font-size: 7px; letter-spacing: .32em; color: var(--dourado); }
+
+.nav-links { display: flex; gap: 28px; }
+.nav-links li { font-size: 11px; letter-spacing: .08em; color: var(--cinza); cursor: pointer; padding-bottom: 2px; transition: color .2s; }
+.nav-links li:hover, .nav-links li.active { color: var(--terra); }
+.nav-links li.active { border-bottom: 1.5px solid var(--terra); }
+
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.nav-btn { font-size: 11px; letter-spacing: .06em; color: var(--cinza); transition: color .2s; }
+.nav-btn:hover { color: var(--terra); }
+.cart-btn { display: flex; align-items: center; gap: 6px; }
+.cart-count { background: var(--terra); color: var(--creme); border-radius: 50%; width: 16px; height: 16px; font-size: 9px; display: flex; align-items: center; justify-content: center; font-weight: 500; transition: transform .3s var(--ease); }
+.cart-count.bump { transform: scale(1.4); }
+
+/* ── HERO ── */
+/* Psychological principle: CTA above fold, left text for Western reading pattern, image right for emotional activation */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 100px);
+  max-height: 700px;
+  background: var(--creme);
+}
+
+.hero-text {
+  padding: 56px 52px 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: .18em;
+  color: var(--terra);
+  font-family: var(--f-display);
+  margin-bottom: 22px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 16px; height: .7px; background: var(--dourado); }
+
+.hero-h1 {
+  font-family: var(--f-serif);
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--escuro);
+  margin-bottom: 20px;
+}
+.hero-h1 em { font-style: italic; color: var(--terra); }
+
+.hero-p {
+  font-size: 15px;
+  color: var(--cinza);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 380px;
+  margin-bottom: 36px;
+}
+
+/* CTA: primary above fold, high contrast, generous whitespace (research: +42% CTR with more whitespace around CTA) */
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--terra);
+  color: var(--creme);
+  font-size: 11px;
+  letter-spacing: .14em;
+  font-family: var(--f-display);
+  padding: 16px 36px;
+  width: fit-content;
+  transition: background .25s, transform .2s, gap .2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after { content: '→'; font-size: 14px; transition: transform .25s var(--ease); }
+.btn-primary:hover { background: var(--escuro); gap: 16px; }
+.btn-primary:hover::after { transform: translateX(4px); }
+.btn-primary:active { transform: scale(.97); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--terra);
+  font-size: 11px;
+  letter-spacing: .1em;
+  font-family: var(--f-display);
+  border-bottom: 1px solid var(--bege-d);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: border-color .2s, gap .2s;
+}
+.btn-ghost:hover { border-color: var(--terra); gap: 12px; }
+
+/* Trust signals below CTA — reduce purchase anxiety */
+.hero-trust { display: flex; flex-wrap: wrap; gap: 18px; }
+.ht { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--cinza); font-weight: 300; }
+.ht-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--dourado); flex-shrink: 0; }
+
+.hero-visual {
+  background: var(--bege);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated decorative shelves */
+.shelf-scene { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 40px; }
+.shelf-row { display: flex; align-items: flex-end; gap: 5px; }
+.sitem { border-radius: 2px; transition: transform .4s var(--ease); }
+.sitem:hover { transform: translateY(-6px); }
+.shelf-line { width: 200px; height: 4px; background: var(--bege-d); border-radius: 2px; }
+.hero-photo-note { font-size: 10px; letter-spacing: .18em; color: var(--dourado); font-family: var(--f-display); margin-top: 8px; }
+
+/* ── SOCIAL PROOF STRIP (mid-page, not bottom — research: 84% more conversions mid-scroll) ── */
+.proof-strip {
+  background: var(--escuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 18px 48px;
+  flex-wrap: wrap;
+}
+.proof-item { display: flex; align-items: center; gap: 10px; }
+.proof-num { font-family: var(--f-serif); font-size: 26px; font-weight: 400; color: var(--creme); letter-spacing: .02em; }
+.proof-text { font-size: 11px; color: rgba(247,240,230,.5); line-height: 1.4; font-weight: 300; }
+.proof-sep { width: 1px; height: 28px; background: rgba(196,149,106,.2); }
+
+/* ── CATS BAR ── */
+.cats-bar { display: flex; overflow-x: auto; background: var(--branco); border-bottom: 1px solid var(--bege); scrollbar-width: none; }
+.cats-bar::-webkit-scrollbar { display: none; }
+.cat-pill { padding: 14px 24px; font-size: 11px; letter-spacing: .06em; color: var(--cinza); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .2s; }
+.cat-pill:hover { color: var(--terra); }
+.cat-pill.active { color: var(--terra); border-bottom-color: var(--terra); font-weight: 500; }
+
+/* ── SECTION ── */
+.section { padding: 56px 48px; }
+
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; padding-bottom: 16px; border-bottom: .5px solid var(--bege-d); }
+.sec-title { font-family: var(--f-serif); font-size: 30px; font-weight: 400; color: var(--escuro); }
+.sec-title em { font-style: italic; color: var(--terra); }
+.sec-link { font-size: 11px; color: var(--terra); font-family: var(--f-display); border-bottom: 1px solid var(--bege-d); padding-bottom: 1px; transition: border-color .2s; }
+.sec-link:hover { border-color: var(--terra); cursor: pointer; }
+
+/* ── PRODUCTS — Paradox of choice: show only 3, not 4 (less = more decisions made) ── */
+.prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.prod-card {
+  background: var(--branco);
+  border: 1px solid var(--bege);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s var(--ease-out), box-shadow .3s;
+  position: relative;
+}
+.prod-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(44,24,16,.1); }
+.prod-card:hover .prod-add { background: var(--terra); color: var(--creme); }
+.prod-card:hover .prod-overlay { opacity: 1; }
+
+.prod-overlay {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: var(--terra);
+  color: var(--creme);
+  font-size: 10px;
+  padding: 6px 10px;
+  letter-spacing: .08em;
+  font-family: var(--f-display);
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+.prod-img { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; }
+.prod-tag { position: absolute; top: 10px; left: 10px; font-size: 9px; letter-spacing: .1em; font-family: var(--f-display); padding: 4px 8px; }
+.tag-new { background: var(--terra); color: var(--creme); }
+.tag-off { background: var(--escuro); color: var(--creme); }
+
+.prod-body { padding: 16px 16px 0; }
+.prod-cat { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--dourado); margin-bottom: 5px; font-family: var(--f-display); }
+.prod-name { font-size: 14px; font-weight: 500; color: var(--escuro); line-height: 1.4; margin-bottom: 10px; }
+
+.stars { display: flex; align-items: center; gap: 2px; margin-bottom: 10px; }
+.star { width: 10px; height: 10px; background: #f0c060; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); transition: transform .2s; }
+.prod-card:hover .star { transform: scale(1.1); }
+.star-count { font-size: 11px; color: #aaa; margin-left: 4px; }
+
+.prod-price-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.prod-price { font-size: 18px; font-weight: 600; color: var(--terra); }
+.prod-price-old { font-size: 12px; color: #ccc; text-decoration: line-through; }
+
+/* FOMO: live social proof on product cards */
+.prod-fomo { margin-bottom: 12px; }
+
+.prod-add {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--creme);
+  border-top: 1px solid var(--bege);
+  font-size: 10px;
+  letter-spacing: .1em;
+  font-family: var(--f-display);
+  color: var(--terra);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background .25s, color .25s;
+}
+
+/* ── TRUST BAR ── */
+.trust-bar { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--escuro); }
+.tr { padding: 26px 20px; text-align: center; border-right: 1px solid rgba(196,149,106,.12); display: flex; flex-direction: column; align-items: center; gap: 10px; transition: background .3s; }
+.tr:hover { background: rgba(196,149,106,.05); }
+.tr:last-child { border-right: none; }
+.tr svg { opacity: .75; transition: opacity .3s; }
+.tr:hover svg { opacity: 1; }
+.tr-label { font-size: 11px; color: var(--dourado); letter-spacing: .06em; font-family: var(--f-display); }
+.tr-sub { font-size: 10px; color: rgba(196,149,106,.4); font-weight: 300; }
+
+/* ── EDITORIAL (aspirational content — reciprocity principle: give value before asking to buy) ── */
+.editorial { display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
+.editorial-visual { background: var(--bege-d); display: flex; align-items: center; justify-content: center; }
+.editorial-text { background: var(--escuro); padding: 60px 52px; display: flex; flex-direction: column; justify-content: center; }
+.ed-eye { font-size: 9px; letter-spacing: .22em; font-family: var(--f-display); color: var(--dourado); margin-bottom: 18px; }
+.ed-title { font-family: var(--f-serif); font-size: 38px; font-weight: 300; color: var(--creme); line-height: 1.18; margin-bottom: 20px; }
+.ed-title em { font-style: italic; color: var(--dourado); }
+.ed-body { font-size: 14px; color: rgba(247,240,230,.55); line-height: 1.8; font-weight: 300; max-width: 340px; margin-bottom: 30px; }
+.ed-link { font-size: 10px; letter-spacing: .16em; font-family: var(--f-display); color: var(--dourado); border-bottom: .5px solid var(--dourado); padding-bottom: 2px; width: fit-content; cursor: pointer; transition: opacity .2s; }
+.ed-link:hover { opacity: .7; }
+
+/* ── REVIEWS — Peak-end rule: place reviews mid-page at emotional peak, not just footer ── */
+.reviews { background: var(--creme); padding: 56px 48px; }
+.rev-head { text-align: center; margin-bottom: 8px; }
+.rev-title { font-family: var(--f-serif); font-size: 30px; font-weight: 400; }
+.rev-sub { font-size: 12px; color: var(--cinza); text-align: center; margin: 6px 0 36px; font-weight: 300; }
+.revs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+.rev-card {
+  background: var(--branco);
+  border: 1px solid var(--bege);
+  border-radius: 4px;
+  padding: 24px;
+  transition: transform .3s var(--ease-out), box-shadow .3s;
+}
+.rev-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,24,16,.07); }
+
+.rev-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.rev-text { font-family: var(--f-serif); font-size: 15px; font-style: italic; font-weight: 300; color: var(--escuro); line-height: 1.68; margin-bottom: 18px; }
+.rev-author { display: flex; align-items: center; gap: 10px; }
+.rev-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--bege); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--terra); font-family: var(--f-display); flex-shrink: 0; }
+.rev-info { font-size: 11px; color: var(--cinza); font-weight: 300; line-height: 1.4; }
+
+/* ── UGC SECTION (social proof — research: visual UGC increases add-to-cart rate) ── */
+.ugc { padding: 52px 48px; background: var(--branco); }
+.ugc-head { text-align: center; margin-bottom: 28px; }
+.ugc-title { font-family: var(--f-serif); font-size: 22px; font-weight: 400; color: var(--escuro); }
+.ugc-sub { font-size: 12px; color: var(--cinza); margin-top: 6px; font-weight: 300; font-style: italic; font-family: var(--f-serif); }
+.ugc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.ugc-item { aspect-ratio: 1; background: var(--bege); display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; position: relative; }
+.ugc-item:hover .ugc-overlay { opacity: 1; }
+.ugc-overlay { position: absolute; inset: 0; background: rgba(44,24,16,.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s; }
+.ugc-overlay span { font-size: 10px; letter-spacing: .1em; color: var(--creme); font-family: var(--f-display); }
+.ugc-placeholder { font-size: 9px; letter-spacing: .1em; color: var(--dourado); font-family: var(--f-display); text-align: center; padding: 10px; line-height: 1.5; }
+
+/* ── BANNERS ── */
+.banners { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 48px 52px; }
+.banner-card { padding: 36px 32px; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; min-height: 190px; cursor: pointer; transition: filter .25s; }
+.banner-card:hover { filter: brightness(.95); }
+.banner-card.a { background: var(--creme); border: 1px solid var(--bege-d); }
+.banner-card.b { background: var(--escuro); }
+.ban-eye { font-size: 9px; letter-spacing: .2em; font-family: var(--f-display); margin-bottom: 10px; }
+.banner-card.a .ban-eye { color: var(--dourado); }
+.banner-card.b .ban-eye { color: var(--dourado); }
+.ban-title { font-family: var(--f-serif); font-size: 24px; font-weight: 400; line-height: 1.25; margin-bottom: 18px; }
+.ban-title em { font-style: italic; }
+.banner-card.a .ban-title { color: var(--escuro); }
+.banner-card.b .ban-title { color: var(--creme); }
+.ban-link { font-size: 10px; letter-spacing: .14em; font-family: var(--f-display); border-bottom: .5px solid; padding-bottom: 2px; width: fit-content; }
+.banner-card.a .ban-link { color: var(--terra); border-color: var(--terra); }
+.banner-card.b .ban-link { color: var(--dourado); border-color: var(--dourado); }
+
+/* ── FOOTER ── */
+.footer { background: var(--creme); border-top: 1px solid var(--bege-d); padding: 52px 48px 28px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 40px; }
+.f-logo { font-family: var(--f-display); font-size: 17px; letter-spacing: .18em; color: var(--escuro); margin-bottom: 3px; }
+.f-logo-sub { font-size: 8px; letter-spacing: .28em; color: var(--dourado); font-family: var(--f-display); margin-bottom: 14px; }
+.f-desc { font-size: 12px; color: var(--cinza); line-height: 1.75; font-weight: 300; max-width: 240px; }
+.footer-col h4 { font-size: 9px; letter-spacing: .18em; font-family: var(--f-display); color: var(--escuro); margin-bottom: 14px; font-weight: 500; }
+.footer-col li { font-size: 12px; color: var(--cinza); margin-bottom: 8px; cursor: pointer; font-weight: 300; transition: color .2s; }
+.footer-col li:hover { color: var(--terra); }
+.footer-bottom { border-top: .5px solid var(--bege-d); padding-top: 18px; display: flex; justify-content: space-between; align-items: center; }
+.f-copy { font-size: 11px; color: #c0b0a0; font-weight: 300; }
+.f-legal { display: flex; gap: 20px; }
+.f-legal span { font-size: 11px; color: #c0b0a0; cursor: pointer; transition: color .2s; }
+.f-legal span:hover { color: var(--terra); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; max-height: none; }
+  .hero-visual { min-height: 280px; }
+  .prods { grid-template-columns: repeat(2, 1fr); }
+  .trust-bar { grid-template-columns: repeat(2, 1fr); }
+  .revs { grid-template-columns: 1fr; }
+  .editorial { grid-template-columns: 1fr; }
+  .ugc-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .section { padding: 40px 24px; }
+  .banners { padding: 0 24px 40px; grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .prods { grid-template-columns: 1fr; }
+  .hero-text { padding: 36px 24px; }
+  .hero-h1 { font-size: 36px; }
+  .proof-strip { gap: 20px; }
+  .proof-sep { display: none; }
+  .ugc-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST (micro-interaction feedback) -->
+<div class="toast" id="toast">
+  <div class="toast-icon"></div>
+  <span id="toast-msg">Produto adicionado ao carrinho</span>
+</div>
+
+<!-- ANNOUNCE BAR -->
+<div class="announce">
+  Frete grátis acima de R$ 99 &nbsp;·&nbsp; <strong>Use RECANTE10 para 10% na primeira compra</strong> &nbsp;·&nbsp; Entrega em até 12 dias
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="logo">
+    <div class="logo-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
+    <div class="logo-name">RECANTÉ</div>
+    <div class="logo-sub">CASA &amp; ORGANIZAÇÃO</div>
+  </div>
+  <ul class="nav-links">
+    <li class="active">Início</li>
+    <li>Cozinha</li>
+    <li>Quarto</li>
+    <li>Banheiro</li>
+    <li>Escritório</li>
+    <li>Novidades</li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn">Buscar</button>
+    <button class="nav-btn">Conta</button>
+    <button class="nav-btn cart-btn">
+      Carrinho <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO — CTA above fold, psychological: 304% more clicks -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Nova coleção — outono 2025</div>
+    <h1 class="hero-h1">
+      Organização que<br>
+      transforma sua<br>
+      <em>rotina em casa</em>
+    </h1>
+    <p class="hero-p">
+      Produtos práticos e bonitos para cada cantinho da sua casa.
+      Entrega rápida, qualidade garantida e troca sem complicação.
+    </p>
+    <!-- Primary CTA with generous whitespace (research: +42% CTR) -->
+    <div class="hero-cta">
+      <button class="btn-primary">Ver coleção</button>
+      <span class="btn-ghost">Ver mais vendidos</span>
+    </div>
+    <!-- Trust signals immediately below CTA — reduce anxiety -->
+    <div class="hero-trust">
+      <div class="ht"><div class="ht-dot"></div>Entrega em até 12 dias</div>
+      <div class="ht"><div class="ht-dot"></div>Troca garantida 30 dias</div>
+      <div class="ht"><div class="ht-dot"></div>Pix sem juros</div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="shelf-scene">
+      <!-- Placeholder: replace with lifestyle photo -->
+      <div class="shelf-row">
+        <div class="sitem" style="width:26px;height:82px;background:#d4b898;"></div>
+        <div class="sitem" style="width:26px;height:100px;background:#c4956a;"></div>
+        <div class="sitem" style="width:20px;height:68px;background:#e0cdb0;"></div>
+        <div class="sitem" style="width:26px;height:90px;background:#2C1810;opacity:.65;"></div>
+        <div class="sitem" style="width:26px;height:75px;background:#c4956a;opacity:.7;"></div>
+        <div class="sitem" style="width:22px;height:85px;background:#d4b898;"></div>
+      </div>
+      <div class="shelf-line"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <div class="sitem" style="width:80px;height:52px;background:#c4a882;border-radius:2px;"></div>
+        <div class="sitem" style="width:62px;height:52px;background:#e0cdb0;border-radius:2px;"></div>
+        <div class="sitem" style="width:70px;height:52px;background:#8B4A2A;border-radius:2px;opacity:.55;"></div>
+      </div>
+      <p class="hero-photo-note">foto lifestyle aqui</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP — Numbers build immediate trust (research: mid-page placement) -->
+<div class="proof-strip reveal">
+  <div class="proof-item">
+    <div class="proof-num">2.4k+</div>
+    <div class="proof-text">clientes<br>satisfeitas</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">4,9</div>
+    <div class="proof-text">nota média<br>de avaliação</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">98%</div>
+    <div class="proof-text">recomendam<br>para amigas</div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-item">
+    <div class="proof-num">30</div>
+    <div class="proof-text">dias de<br>troca garantida</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="cats-bar">
+  <div class="cat-pill active">Tudo</div>
+  <div class="cat-pill">Cozinha &amp; Despensa</div>
+  <div class="cat-pill">Quarto &amp; Closet</div>
+  <div class="cat-pill">Banheiro</div>
+  <div class="cat-pill">Sala &amp; Escritório</div>
+  <div class="cat-pill">Menos de R$ 50</div>
+  <div class="cat-pill">Lançamentos</div>
+</div>
+
+<!-- PRODUCTS — 3 only (paradox of choice: less = more conversions) -->
+<section class="section" style="background:#fff;">
+  <div class="sec-head reveal">
+    <h2 class="sec-title">Mais <em>vendidos</em></h2>
+    <span class="sec-link">Ver todos os produtos →</span>
+  </div>
+  <div class="prods">
+
+    <div class="prod-card reveal">
+      <div class="prod-img" style="background:#fdf0e8;">
+        <span class="prod-tag tag-new">Mais vendido</span>
+        <div class="prod-overlay">Ver produto</div>
+        <div style="width:54px;height:84px;background:#c4a882;border-radius:2px;"></div>
+      </div>
+      <div class="prod-body">
+        <p class="prod-cat">Cozinha</p>
+        <p class="prod-name">Organizador de gaveta modular</p>
+        <div class="stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div>
+          <div class="star"></div><div class="star"></div>
+          <span class="star-count">(87)</span>
+        </div>
+        <!-- FOMO: live activity signal -->
+        <div class="prod-fomo">
+          <div class="fomo"><div class="fomo-dot"></div>47 pessoas viram hoje</div>
+        </div>
+        <div class="prod-price-row">
+          <span class="prod-price">R$ 49,90</span>
+        </div>
+      </div>
+      <button class="prod-add" onclick="addToCart(this, 'Organizador de gaveta')">
+        <span>Adicionar ao carrinho</span><span>+</span>
+      </button>
+    </div>
+
+    <div class="prod-card reveal reveal-delay-1">
+      <div class="prod-img" style="background:#f5efe8;">
+        <span class="prod-tag tag-off">−20%</span>
+        <div class="prod-overlay">Ver produto</div>
+        <div style="width:78px;height:54px;background:#8B4A2A;border-radius:2px;opacity:.75;"></div>
+      </div>
+      <div class="prod-body">
+        <p class="prod-cat">Despensa</p>
+        <p class="prod-name">Porta-temperos magnético inox</p>
+        <div class="stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div>
+          <div class="star"></div><div class="star"></div>
+          <span class="star-count">(53)</span>
+        </div>
+        <div class="prod-fomo">
+          <div class="fomo"><div class="fomo-dot"></div>Últimas 3 unidades</div>
+        </div>
+        <div class="prod-price-row">
+          <span class="prod-price">R$ 59,90</span>
+          <span class="prod-price-old">R$ 74,90</span>
+        </div>
+      </div>
+      <button class="prod-add" onclick="addToCart(this, 'Porta-temperos magnético')">
+        <span>Adicionar ao carrinho</span><span>+</span>
+      </button>
+    </div>
+
+    <div class="prod-card reveal reveal-delay-2">
+      <div class="prod-img" style="background:#fdf8f4;">
+        <div class="prod-overlay">Ver produto</div>
+        <div style="width:90px;height:50px;background:#e0cdb0;border-radius:2px;"></div>
+      </div>
+      <div class="prod-body">
+        <p class="prod-cat">Multiuso</p>
+        <p class="prod-name">Ganchos adesivos premium 6 unidades</p>
+        <div class="stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div>
+          <div class="star"></div><div class="star"></div>
+          <span class="star-count">(124)</span>
+        </div>
+        <div class="prod-fomo">
+          <div class="fomo"><div class="fomo-dot"></div>23 comprados hoje</div>
+        </div>
+        <div class="prod-price-row">
+          <span class="prod-price">R$ 34,90</span>
+        </div>
+      </div>
+      <button class="prod-add" onclick="addToCart(this, 'Ganchos adesivos premium')">
+        <span>Adicionar ao carrinho</span><span>+</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANNERS -->
+<div class="banners">
+  <div class="banner-card a reveal">
+    <div>
+      <p class="ban-eye">Coleção cozinha</p>
+      <h3 class="ban-title">Sua cozinha <em>organizada</em> de verdade</h3>
+    </div>
+    <span class="ban-link">Explorar coleção →</span>
+  </div>
+  <div class="banner-card b reveal reveal-delay-1">
+    <div>
+      <p class="ban-eye">Dica da semana</p>
+      <h3 class="ban-title">3 produtos para <em>transformar</em> sua despensa</h3>
+    </div>
+    <span class="ban-link">Ver dica →</span>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="tr reveal">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M14 4l2.5 6.5H23l-5.5 4 2 6.5L14 17l-5.5 4 2-6.5L5 10.5h6.5z" stroke="#c4956a" stroke-width="1.2" fill="none"/>
+    </svg>
+    <p class="tr-label">Entrega rápida</p>
+    <p class="tr-sub">Até 12 dias úteis</p>
+  </div>
+  <div class="tr reveal reveal-delay-1">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="3" y="3" width="22" height="22" rx="3" stroke="#c4956a" stroke-width="1.2"/>
+      <path d="M8 14l4 4 8-8" stroke="#c4956a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p class="tr-label">Troca garantida</p>
+    <p class="tr-sub">30 dias sem complicação</p>
+  </div>
+  <div class="tr reveal reveal-delay-2">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="2" y="7" width="24" height="16" rx="2" stroke="#c4956a" stroke-width="1.2"/>
+      <path d="M2 12h24" stroke="#c4956a" stroke-width="1.2"/>
+      <path d="M7 16h5" stroke="#c4956a" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <p class="tr-label">Compra segura</p>
+    <p class="tr-sub">Pix · Cartão · Parcelado</p>
+  </div>
+  <div class="tr reveal reveal-delay-3">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="11" stroke="#c4956a" stroke-width="1.2"/>
+      <path d="M14 8v6l4 2.5" stroke="#c4956a" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <p class="tr-label">Atendimento ágil</p>
+    <p class="tr-sub">Resposta em até 24h</p>
+  </div>
+</div>
+
+<!-- EDITORIAL — Reciprocity: give value before asking purchase -->
+<section class="editorial">
+  <div class="editorial-visual reveal">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:40px;">
+      <div style="display:flex;align-items:flex-end;gap:6px;">
+        <div class="sitem" style="width:22px;height:70px;background:#c4956a;opacity:.6;"></div>
+        <div class="sitem" style="width:22px;height:90px;background:#2C1810;opacity:.5;"></div>
+        <div class="sitem" style="width:22px;height:58px;background:#e0cdb0;"></div>
+        <div class="sitem" style="width:22px;height:78px;background:#c4956a;opacity:.45;"></div>
+        <div class="sitem" style="width:22px;height:64px;background:#2C1810;opacity:.35;"></div>
+      </div>
+      <div style="width:150px;height:4px;background:#c4a882;border-radius:1px;"></div>
+      <p style="font-size:9px;letter-spacing:.14em;color:#a08060;font-family:'Cinzel',serif;">foto lifestyle aqui</p>
+    </div>
+  </div>
+  <div class="editorial-text">
+    <p class="ed-eye reveal">O cantinho certo para cada coisa</p>
+    <h2 class="ed-title reveal reveal-delay-1">Organizar é<br><em>um ato de<br>cuidado</em></h2>
+    <p class="ed-body reveal reveal-delay-2">
+      Quando sua casa tem lugar para tudo, você passa menos tempo
+      procurando e mais tempo vivendo. Cada produto da Recanté foi
+      escolhido com esse propósito.
+    </p>
+    <span class="ed-link reveal reveal-delay-3">Conheça nossa filosofia →</span>
+  </div>
+</section>
+
+<!-- REVIEWS — Mid-page placement (research: 84% more conversions mid-scroll) -->
+<section class="reviews">
+  <div class="rev-head reveal">
+    <h2 class="rev-title">O que nossas clientes dizem</h2>
+  </div>
+  <p class="rev-sub reveal">Mais de 2.400 avaliações · Nota 4,9 de 5 ★</p>
+  <div class="revs">
+    <div class="rev-card reveal">
+      <div class="rev-stars">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div>
+      </div>
+      <p class="rev-text">"O organizador de gaveta chegou rapidinho e é exatamente o que eu precisava. Minha cozinha ficou completamente diferente!"</p>
+      <div class="rev-author">
+        <div class="rev-avatar">MS</div>
+        <div class="rev-info">Mariana S. · São Paulo<br>Compra verificada</div>
+      </div>
+    </div>
+    <div class="rev-card reveal reveal-delay-1">
+      <div class="rev-stars">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div>
+      </div>
+      <p class="rev-text">"Produto de qualidade, veio bem embalado e no prazo prometido. Já comprei três vezes e recomendo para todas as amigas!"</p>
+      <div class="rev-author">
+        <div class="rev-avatar">FL</div>
+        <div class="rev-info">Fernanda L. · Curitiba<br>Compra verificada</div>
+      </div>
+    </div>
+    <div class="rev-card reveal reveal-delay-2">
+      <div class="rev-stars">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div>
+      </div>
+      <p class="rev-text">"Finalmente achei um produto que realmente funciona. Meu armário está organizado pela primeira vez na vida!"</p>
+      <div class="rev-author">
+        <div class="rev-avatar">CR</div>
+        <div class="rev-info">Camila R. · Belo Horizonte<br>Compra verificada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UGC SECTION — Visual social proof (research: increases add-to-cart rate) -->
+<section class="ugc">
+  <div class="ugc-head reveal">
+    <h2 class="ugc-title">@recante no Instagram</h2>
+    <p class="ugc-sub">Compartilhe sua casa organizada e apareça aqui</p>
+  </div>
+  <div class="ugc-grid">
+    <div class="ugc-item reveal">
+      <div class="ugc-placeholder">foto cliente<br>aqui</div>
+      <div class="ugc-overlay"><span>Ver produto</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-1">
+      <div class="ugc-placeholder">foto cliente<br>aqui</div>
+      <div class="ugc-overlay"><span>Ver produto</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-2">
+      <div class="ugc-placeholder">foto cliente<br>aqui</div>
+      <div class="ugc-overlay"><span>Ver produto</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-3">
+      <div class="ugc-placeholder">foto cliente<br>aqui</div>
+      <div class="ugc-overlay"><span>Ver produto</span></div>
+    </div>
+    <div class="ugc-item reveal reveal-delay-4">
+      <div class="ugc-placeholder">foto cliente<br>aqui</div>
+      <div class="ugc-overlay"><span>Ver produto</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <p class="f-logo">RECANTÉ</p>
+      <p class="f-logo-sub">CASA &amp; ORGANIZAÇÃO</p>
+      <p class="f-desc">Produtos de organização para transformar cada cantinho da sua casa. Qualidade garantida, entrega rápida, troca sem complicação.</p>
+    </div>
+    <div class="footer-col">
+      <h4>A loja</h4>
+      <ul>
+        <li>Sobre nós</li>
+        <li>Blog</li>
+        <li>Instagram</li>
+        <li>Contato</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ajuda</h4>
+      <ul>
+        <li>Política de troca</li>
+        <li>Prazo de entrega</li>
+        <li>Pagamentos</li>
+        <li>FAQ</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categorias</h4>
+      <ul>
+        <li>Cozinha</li>
+        <li>Quarto</li>
+        <li>Banheiro</li>
+        <li>Escritório</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Recanté · recante.com.br</span>
+    <div class="f-legal">
+      <span>Política de privacidade</span>
+      <span>Termos de uso</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── SCROLL REVEAL (IntersectionObserver) ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── NAV SHADOW ON SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ── CART MICRO-INTERACTION (Hook Model: action → reward) ── */
+let cartCount = 0;
+function addToCart(btn, productName) {
+  cartCount++;
+  const countEl = document.getElementById('cart-count');
+  countEl.textContent = cartCount;
+  countEl.classList.add('bump');
+  setTimeout(() => countEl.classList.remove('bump'), 400);
+
+  // Toast notification (immediate feedback = trust)
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = `"${productName}" adicionado ao carrinho`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3200);
+
+  // Button micro-feedback
+  const originalText = btn.querySelector('span:first-child').textContent;
+  btn.querySelector('span:first-child').textContent = '✓ Adicionado!';
+  btn.style.background = '#4a7a4a';
+  btn.style.color = '#fff';
+  setTimeout(() => {
+    btn.querySelector('span:first-child').textContent = originalText;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2000);
+}
+
+/* ── CAT PILLS ACTIVE STATE ── */
+document.querySelectorAll('.cat-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
