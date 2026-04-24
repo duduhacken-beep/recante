@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre nós — Recanté</title>
+<meta name="description" content="A Recanté existe para a mulher que sabe que uma casa organizada muda tudo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+:root {
+  --escuro:    #2C1810;
+  --terra:     #8B4A2A;
+  --terra-d:   #6d3820;
+  --dourado:   #c4956a;
+  --dourado-l: #e0b98a;
+  --creme:     #F7F0E6;
+  --bege:      #EFE5D5;
+  --bege-d:    #DDD0BA;
+  --cinza:     #6b5040;
+  --branco:    #ffffff;
+  --f-display: 'Cinzel', serif;
+  --f-body:    'DM Sans', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --ease:      cubic-bezier(.22,.68,0,1.2);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+}
+
+body { font-family: var(--f-body); background: var(--branco); color: var(--escuro); line-height: 1.6; overflow-x: hidden; }
+
+.scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--dourado), var(--terra), var(--dourado-l)); z-index: 9999; width: 0%; transition: width .1s linear; box-shadow: 0 0 10px rgba(196,149,106,.5); }
+
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.announce { background: var(--escuro); color: var(--dourado); padding: 10px 0; font-size: 11px; letter-spacing: .1em; font-family: var(--f-display); position: relative; overflow: hidden; white-space: nowrap; }
+.announce strong { color: var(--creme); }
+.marquee-track { display: inline-flex; gap: 48px; animation: marquee 32s linear infinite; padding-left: 48px; }
+.marquee-track span { display: inline-flex; align-items: center; gap: 48px; }
+.marquee-sep { color: var(--dourado); opacity: .5; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; position: sticky; top: 0; z-index: 100; transition: height .35s var(--ease-out), box-shadow .3s, border-color .3s; }
+.nav.scrolled { height: 60px; box-shadow: 0 4px 24px rgba(44,24,16,.08); border-bottom-color: var(--bege); }
+.logo { display: flex; flex-direction: column; align-items: center; gap: 1px; cursor: pointer; transition: transform .4s var(--ease); }
+.logo:hover { transform: scale(1.04); }
+.logo-orn { display: flex; align-items: center; gap: 5px; }
+.logo-orn .ln { width: 18px; height: .7px; background: var(--dourado); transition: width .35s var(--ease); }
+.logo-orn .dm { width: 5px; height: 5px; background: var(--dourado); transform: rotate(45deg); transition: transform .4s var(--ease); }
+.logo:hover .logo-orn .ln { width: 26px; }
+.logo:hover .logo-orn .dm { transform: rotate(225deg); }
+.logo-name { font-family: var(--f-display); font-size: 19px; font-weight: 400; letter-spacing: .2em; color: var(--escuro); line-height: 1; transition: letter-spacing .35s var(--ease); }
+.logo:hover .logo-name { letter-spacing: .28em; }
+.logo-sub { font-family: var(--f-display); font-size: 7px; letter-spacing: .32em; color: var(--dourado); }
+.nav.scrolled .logo-sub { opacity: 0; height: 0; margin: 0; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links li { font-size: 11px; letter-spacing: .08em; color: var(--cinza); cursor: pointer; padding-bottom: 4px; position: relative; transition: color .25s; }
+.nav-links li::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1px; background: var(--terra); transition: width .3s var(--ease-out), left .3s var(--ease-out); }
+.nav-links li:hover { color: var(--terra); }
+.nav-links li:hover::after, .nav-links li.active::after { width: 100%; left: 0; }
+.nav-links li.active { color: var(--terra); }
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.nav-btn { font-size: 11px; letter-spacing: .06em; color: var(--cinza); transition: color .2s; position: relative; }
+.nav-btn::before { content: ''; position: absolute; inset: -6px -10px; border-radius: 4px; background: var(--bege); opacity: 0; z-index: -1; transition: opacity .25s; }
+.nav-btn:hover { color: var(--terra); }
+.nav-btn:hover::before { opacity: .4; }
+.cart-btn { display: flex; align-items: center; gap: 6px; }
+.cart-count { background: var(--terra); color: var(--creme); border-radius: 50%; width: 18px; height: 18px; font-size: 9px; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+
+/* PAGE HERO */
+.page-hero { background: var(--escuro); padding: 72px 48px; text-align: center; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.08) 0%, transparent 70%); }
+.page-hero-orn { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
+.ph-ln { width: 44px; height: .7px; background: var(--dourado); }
+.ph-dm { width: 8px; height: 8px; background: var(--dourado); transform: rotate(45deg); }
+.page-hero h1 { font-family: var(--f-serif); font-size: 48px; font-weight: 300; color: var(--creme); line-height: 1.2; margin-bottom: 14px; position: relative; }
+.page-hero h1 em { font-style: italic; color: var(--dourado); }
+.page-hero p { font-size: 15px; color: rgba(247,240,230,.5); font-weight: 300; max-width: 500px; margin: 0 auto; position: relative; }
+
+/* CONTENT WRAPPER */
+.page-content { max-width: 780px; margin: 0 auto; padding: 72px 48px; }
+
+/* FOOTER */
+.footer { background: var(--creme); border-top: 1px solid var(--bege-d); padding: 56px 48px 30px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
+.f-brand { display: flex; flex-direction: column; gap: 14px; }
+.f-logo { font-family: var(--f-display); font-size: 18px; letter-spacing: .2em; color: var(--escuro); margin-bottom: 3px; }
+.f-logo-sub { font-size: 8px; letter-spacing: .28em; color: var(--dourado); font-family: var(--f-display); margin-bottom: 16px; }
+.f-desc { font-size: 12px; color: var(--cinza); line-height: 1.75; font-weight: 300; max-width: 260px; }
+.footer-col h4 { font-size: 9px; letter-spacing: .18em; font-family: var(--f-display); color: var(--escuro); margin-bottom: 16px; font-weight: 500; }
+.footer-col li { font-size: 12px; color: var(--cinza); margin-bottom: 10px; cursor: pointer; font-weight: 300; transition: color .25s, padding-left .25s; }
+.footer-col li:hover { color: var(--terra); padding-left: 8px; }
+.footer-bottom { border-top: .5px solid var(--bege-d); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+.f-copy { font-size: 11px; color: #c0b0a0; font-weight: 300; }
+.f-legal { display: flex; gap: 20px; }
+.f-legal span { font-size: 11px; color: #c0b0a0; cursor: pointer; transition: color .2s; }
+.f-legal span:hover { color: var(--terra); }
+.to-top { position: fixed; bottom: 24px; left: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--escuro); color: var(--dourado); display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; z-index: 50; opacity: 0; transform: translateY(60px) scale(.6); transition: transform .4s var(--ease), opacity .3s, background .3s; box-shadow: 0 8px 20px rgba(44,24,16,.2); }
+.to-top.show { opacity: 1; transform: translateY(0) scale(1); }
+.to-top:hover { background: var(--terra); color: var(--creme); transform: translateY(-4px) scale(1.1); }
+
+@media (max-width: 960px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .page-hero { padding: 52px 24px; }
+  .page-hero h1 { font-size: 34px; }
+  .page-content { padding: 48px 24px; }
+  .footer { padding: 44px 24px 24px; text-align: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-col { display: flex; flex-direction: column; align-items: center; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+}
+
+.section-block { margin-bottom: 64px; }
+.section-block h2 { font-family: var(--f-serif); font-size: 34px; font-weight: 400; color: var(--escuro); margin-bottom: 8px; }
+.section-block h2 em { font-style: italic; color: var(--terra); }
+.divider { width: 44px; height: 1px; background: var(--dourado); margin: 14px 0 24px; }
+.section-block p { font-size: 15px; color: var(--cinza); line-height: 1.88; font-weight: 300; margin-bottom: 18px; }
+.section-block p strong { color: var(--escuro); font-weight: 500; }
+
+.pain-box { background: var(--creme); border-left: 3px solid var(--dourado); padding: 24px 28px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+.pain-box p { font-family: var(--f-serif); font-size: 19px; font-style: italic; color: var(--escuro); line-height: 1.65; margin: 0; }
+
+.promise-block { background: var(--escuro); padding: 52px 56px; margin: 52px 0; position: relative; overflow: hidden; }
+.promise-block::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.07) 0%, transparent 70%); }
+.promise-eyebrow { font-family: var(--f-display); font-size: 9px; letter-spacing: .22em; color: var(--dourado); margin-bottom: 16px; position: relative; }
+.promise-title { font-family: var(--f-serif); font-size: 28px; font-weight: 300; color: var(--creme); line-height: 1.45; margin-bottom: 32px; position: relative; }
+.promise-title em { font-style: italic; color: var(--dourado); }
+.promise-items { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; position: relative; }
+.promise-item { display: flex; gap: 14px; align-items: flex-start; }
+.promise-check { width: 20px; height: 20px; border-radius: 50%; background: rgba(196,149,106,.12); border: 1px solid var(--dourado); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 10px; color: var(--dourado); }
+.promise-text { font-size: 13px; color: rgba(247,240,230,.65); line-height: 1.65; font-weight: 300; }
+.promise-text strong { color: var(--creme); font-weight: 500; }
+
+.valores { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 28px; }
+.valor-card { background: var(--creme); padding: 28px 22px; border-radius: 4px; border-top: 2px solid var(--dourado); transition: transform .3s var(--ease-out), box-shadow .3s; }
+.valor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,24,16,.08); }
+.valor-icon { margin-bottom: 14px; opacity: .7; }
+.valor-title { font-family: var(--f-display); font-size: 10px; letter-spacing: .14em; color: var(--terra); margin-bottom: 10px; }
+.valor-text { font-size: 13px; color: var(--cinza); line-height: 1.75; font-weight: 300; }
+
+.sobre-cta { text-align: center; padding: 52px 0 0; border-top: .5px solid var(--bege-d); margin-top: 52px; }
+.sobre-cta h3 { font-family: var(--f-serif); font-size: 28px; font-weight: 400; margin-bottom: 10px; }
+.sobre-cta h3 em { font-style: italic; color: var(--terra); }
+.sobre-cta p { font-size: 14px; color: var(--cinza); font-weight: 300; margin-bottom: 28px; }
+.btn-cta { display: inline-block; background: var(--terra); color: var(--creme); font-size: 11px; letter-spacing: .14em; font-family: var(--f-display); padding: 15px 36px; transition: background .25s, transform .2s; }
+.btn-cta:hover { background: var(--escuro); transform: translateY(-2px); }
+.btn-cta-sub { display: block; font-size: 11px; color: var(--cinza); font-style: italic; font-family: var(--f-serif); margin-top: 12px; }
+
+@media(max-width:760px){ .valores{grid-template-columns:1fr;} .promise-block{padding:36px 24px;} .promise-items{grid-template-columns:1fr;} }
+
+</style>
+</head>
+<body>
+<div class="announce">
+  <div class="marquee-track">
+    <span>Frete grátis acima de R$ 99 <span class="marquee-sep">◆</span> <strong>Use RECANTE10 para 10% na primeira compra</strong> <span class="marquee-sep">◆</span> Entrega em até 12 dias <span class="marquee-sep">◆</span> Troca garantida 30 dias <span class="marquee-sep">◆</span> Parcelamento em 6x sem juros <span class="marquee-sep">◆</span></span>
+    <span>Frete grátis acima de R$ 99 <span class="marquee-sep">◆</span> <strong>Use RECANTE10 para 10% na primeira compra</strong> <span class="marquee-sep">◆</span> Entrega em até 12 dias <span class="marquee-sep">◆</span> Troca garantida 30 dias <span class="marquee-sep">◆</span> Parcelamento em 6x sem juros <span class="marquee-sep">◆</span></span>
+  </div>
+</div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="nav" id="nav">
+  <a href="index.html" class="logo">
+    <div class="logo-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
+    <div class="logo-name">RECANTÉ</div>
+    <div class="logo-sub">CASA &amp; ORGANIZAÇÃO</div>
+  </a>
+  <ul class="nav-links">
+    <li class=""><a href="index.html">Início</a></li>
+    <li class=""><a href="#">Cozinha</a></li>
+    <li class=""><a href="#">Quarto</a></li>
+    <li class=""><a href="#">Banheiro</a></li>
+    <li class=""><a href="#">Escritório</a></li>
+    <li class=""><a href="#">Novidades</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn">Buscar</button>
+    <button class="nav-btn">Conta</button>
+    <button class="nav-btn cart-btn">Carrinho <span class="cart-count">0</span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-orn reveal"><div class="ph-ln"></div><div class="ph-dm"></div><div class="ph-ln"></div></div>
+  <h1 class="reveal reveal-delay-1">Para a mulher que sabe que<br><em>casa organizada é vida melhor</em></h1>
+  <p class="reveal reveal-delay-2">A Recanté nasceu de uma frustração que toda mulher conhece.</p>
+</div>
+
+<div class="page-content">
+
+  <div class="section-block">
+    <h2 class="reveal">Você já viveu <em>essa cena?</em></h2>
+    <div class="divider reveal"></div>
+    <div class="pain-box reveal">
+      <p>"Eu sei que tenho aqui em algum lugar... mas onde foi parar?"</p>
+    </div>
+    <p class="reveal">Abrir a gaveta e mexer em tudo sem achar o que procura. Guardar uma coisa e duas semanas depois não saber onde está. Organizar o armário num sábado e encontrá-lo bagunçado na quinta. <strong>Esse ciclo cansa</strong> — e não é culpa sua.</p>
+    <p class="reveal reveal-delay-1">A maioria das casas não tem problema de espaço. Tem problema de sistema. E quando cada coisa tem o seu lugar de verdade, tudo muda: você para de perder tempo, para de perder paciência, e começa a sentir que a sua casa finalmente funciona para você.</p>
+  </div>
+
+  <div class="promise-block reveal-scale">
+    <p class="promise-eyebrow">Nossa promessa para você</p>
+    <p class="promise-title">Cada produto da Recanté foi escolhido com cuidado,<br><em>pensando em quem vai usá-lo de verdade.</em></p>
+    <div class="promise-items">
+      <div class="promise-item">
+        <div class="promise-check">✓</div>
+        <p class="promise-text"><strong>Funciona de verdade</strong> — avaliado em centenas de opiniões reais antes de entrar no catálogo</p>
+      </div>
+      <div class="promise-item">
+        <div class="promise-check">✓</div>
+        <p class="promise-text"><strong>Dura</strong> — nada de produto bonito na foto que quebra em dois meses</p>
+      </div>
+      <div class="promise-item">
+        <div class="promise-check">✓</div>
+        <p class="promise-text"><strong>Chega no prazo</strong> — comunicamos o prazo real e cumprimos</p>
+      </div>
+      <div class="promise-item">
+        <div class="promise-check">✓</div>
+        <p class="promise-text"><strong>Troca sem burocracia</strong> — 30 dias, sem precisar explicar nada</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2 class="reveal">Como <em>escolhemos</em> cada produto</h2>
+    <div class="divider reveal"></div>
+    <p class="reveal">Antes de qualquer produto entrar no catálogo, analisamos centenas de avaliações de pessoas que compraram e usaram no dia a dia. Não de especialistas — de mulheres como você, que contaram o que aconteceu de verdade. Se o produto não resolve o problema que promete, não entra.</p>
+    <p class="reveal reveal-delay-1">Se um produto começa a receber reclamações depois de entrar, ele sai. <strong>Nossa reputação vale mais do que qualquer venda isolada.</strong></p>
+    <div class="valores">
+      <div class="valor-card reveal">
+        <svg class="valor-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#c4956a" stroke-width="1.2"><path d="M14 4l2 5.5H22l-5.5 4 2 5.5L14 15l-5.5 4 2-5.5L5 9.5h6z"/></svg>
+        <p class="valor-title">Curadoria real</p>
+        <p class="valor-text">Cada produto é analisado em avaliações reais antes de entrar. Nenhum passa pelo filtro de aparência — só de resultado.</p>
+      </div>
+      <div class="valor-card reveal reveal-delay-1">
+        <svg class="valor-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#c4956a" stroke-width="1.2"><circle cx="14" cy="14" r="11"/><path d="M14 9v5l3.5 2"/></svg>
+        <p class="valor-title">Prazo honesto</p>
+        <p class="valor-text">Não prometemos o que não podemos cumprir. Informamos o prazo real — e entregamos dentro dele.</p>
+      </div>
+      <div class="valor-card reveal reveal-delay-2">
+        <svg class="valor-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#c4956a" stroke-width="1.2"><path d="M7 14l4.5 4.5L21 9"/><rect x="3" y="3" width="22" height="22" rx="3"/></svg>
+        <p class="valor-title">Troca sem drama</p>
+        <p class="valor-text">Você tem 30 dias para trocar, sem precisar explicar nada. Confiança funciona nos dois sentidos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sobre-cta reveal">
+    <h3>Pronta para ter uma casa que <em>funciona?</em></h3>
+    <p>Veja os produtos que mais transformaram a rotina das nossas clientes.</p>
+    <a href="index.html" class="btn-cta">Ver os mais vendidos →</a>
+    <span class="btn-cta-sub">Troca grátis em 30 dias · sem precisar justificar</span>
+  </div>
+
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="f-brand">
+      <p class="f-logo">RECANTÉ</p>
+      <p class="f-logo-sub">CASA &amp; ORGANIZAÇÃO</p>
+      <p class="f-desc">Produtos de organização para transformar cada cantinho da sua casa. Qualidade garantida, entrega rápida, troca sem complicação.</p>
+    </div>
+    <div class="footer-col"><h4>A loja</h4><ul><li><a href="sobre.html">Sobre nós</a></li><li>Blog</li><li>Instagram</li><li><a href="mailto:contato@recante.com.br">Contato</a></li></ul></div>
+    <div class="footer-col"><h4>Ajuda</h4><ul><li><a href="politica.html">Política de troca</a></li><li>Prazo de entrega</li><li>Pagamentos</li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="footer-col"><h4>Categorias</h4><ul><li>Cozinha</li><li>Quarto</li><li>Banheiro</li><li>Escritório</li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Recanté · recante.com.br</span>
+    <div class="f-legal"><span>Política de privacidade</span><span>Termos de uso</span></div>
+  </div>
+</footer>
+<button class="to-top" id="to-top">↑</button>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  const prog = document.getElementById('scroll-progress');
+  const top = document.getElementById('to-top');
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  if(prog) prog.style.width = pct + '%';
+  if(nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  if(top) top.classList.toggle('show', window.scrollY > 400);
+});
+document.getElementById('to-top')?.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perguntas Frequentes — Recanté</title>
+<meta name="description" content="Respondemos as dúvidas que toda cliente tem antes de comprar na Recanté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+:root {
+  --escuro:    #2C1810;
+  --terra:     #8B4A2A;
+  --terra-d:   #6d3820;
+  --dourado:   #c4956a;
+  --dourado-l: #e0b98a;
+  --creme:     #F7F0E6;
+  --bege:      #EFE5D5;
+  --bege-d:    #DDD0BA;
+  --cinza:     #6b5040;
+  --branco:    #ffffff;
+  --f-display: 'Cinzel', serif;
+  --f-body:    'DM Sans', sans-serif;
+  --f-serif:   'Cormorant Garamond', serif;
+  --ease:      cubic-bezier(.22,.68,0,1.2);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+}
+
+body { font-family: var(--f-body); background: var(--branco); color: var(--escuro); line-height: 1.6; overflow-x: hidden; }
+
+.scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--dourado), var(--terra), var(--dourado-l)); z-index: 9999; width: 0%; transition: width .1s linear; box-shadow: 0 0 10px rgba(196,149,106,.5); }
+
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.announce { background: var(--escuro); color: var(--dourado); padding: 10px 0; font-size: 11px; letter-spacing: .1em; font-family: var(--f-display); position: relative; overflow: hidden; white-space: nowrap; }
+.announce strong { color: var(--creme); }
+.marquee-track { display: inline-flex; gap: 48px; animation: marquee 32s linear infinite; padding-left: 48px; }
+.marquee-track span { display: inline-flex; align-items: center; gap: 48px; }
+.marquee-sep { color: var(--dourado); opacity: .5; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 72px; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; position: sticky; top: 0; z-index: 100; transition: height .35s var(--ease-out), box-shadow .3s, border-color .3s; }
+.nav.scrolled { height: 60px; box-shadow: 0 4px 24px rgba(44,24,16,.08); border-bottom-color: var(--bege); }
+.logo { display: flex; flex-direction: column; align-items: center; gap: 1px; cursor: pointer; transition: transform .4s var(--ease); }
+.logo:hover { transform: scale(1.04); }
+.logo-orn { display: flex; align-items: center; gap: 5px; }
+.logo-orn .ln { width: 18px; height: .7px; background: var(--dourado); transition: width .35s var(--ease); }
+.logo-orn .dm { width: 5px; height: 5px; background: var(--dourado); transform: rotate(45deg); transition: transform .4s var(--ease); }
+.logo:hover .logo-orn .ln { width: 26px; }
+.logo:hover .logo-orn .dm { transform: rotate(225deg); }
+.logo-name { font-family: var(--f-display); font-size: 19px; font-weight: 400; letter-spacing: .2em; color: var(--escuro); line-height: 1; transition: letter-spacing .35s var(--ease); }
+.logo:hover .logo-name { letter-spacing: .28em; }
+.logo-sub { font-family: var(--f-display); font-size: 7px; letter-spacing: .32em; color: var(--dourado); }
+.nav.scrolled .logo-sub { opacity: 0; height: 0; margin: 0; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links li { font-size: 11px; letter-spacing: .08em; color: var(--cinza); cursor: pointer; padding-bottom: 4px; position: relative; transition: color .25s; }
+.nav-links li::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1px; background: var(--terra); transition: width .3s var(--ease-out), left .3s var(--ease-out); }
+.nav-links li:hover { color: var(--terra); }
+.nav-links li:hover::after, .nav-links li.active::after { width: 100%; left: 0; }
+.nav-links li.active { color: var(--terra); }
+.nav-actions { display: flex; align-items: center; gap: 20px; }
+.nav-btn { font-size: 11px; letter-spacing: .06em; color: var(--cinza); transition: color .2s; position: relative; }
+.nav-btn::before { content: ''; position: absolute; inset: -6px -10px; border-radius: 4px; background: var(--bege); opacity: 0; z-index: -1; transition: opacity .25s; }
+.nav-btn:hover { color: var(--terra); }
+.nav-btn:hover::before { opacity: .4; }
+.cart-btn { display: flex; align-items: center; gap: 6px; }
+.cart-count { background: var(--terra); color: var(--creme); border-radius: 50%; width: 18px; height: 18px; font-size: 9px; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+
+/* PAGE HERO */
+.page-hero { background: var(--escuro); padding: 72px 48px; text-align: center; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.08) 0%, transparent 70%); }
+.page-hero-orn { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
+.ph-ln { width: 44px; height: .7px; background: var(--dourado); }
+.ph-dm { width: 8px; height: 8px; background: var(--dourado); transform: rotate(45deg); }
+.page-hero h1 { font-family: var(--f-serif); font-size: 48px; font-weight: 300; color: var(--creme); line-height: 1.2; margin-bottom: 14px; position: relative; }
+.page-hero h1 em { font-style: italic; color: var(--dourado); }
+.page-hero p { font-size: 15px; color: rgba(247,240,230,.5); font-weight: 300; max-width: 500px; margin: 0 auto; position: relative; }
+
+/* CONTENT WRAPPER */
+.page-content { max-width: 780px; margin: 0 auto; padding: 72px 48px; }
+
+/* FOOTER */
+.footer { background: var(--creme); border-top: 1px solid var(--bege-d); padding: 56px 48px 30px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
+.f-brand { display: flex; flex-direction: column; gap: 14px; }
+.f-logo { font-family: var(--f-display); font-size: 18px; letter-spacing: .2em; color: var(--escuro); margin-bottom: 3px; }
+.f-logo-sub { font-size: 8px; letter-spacing: .28em; color: var(--dourado); font-family: var(--f-display); margin-bottom: 16px; }
+.f-desc { font-size: 12px; color: var(--cinza); line-height: 1.75; font-weight: 300; max-width: 260px; }
+.footer-col h4 { font-size: 9px; letter-spacing: .18em; font-family: var(--f-display); color: var(--escuro); margin-bottom: 16px; font-weight: 500; }
+.footer-col li { font-size: 12px; color: var(--cinza); margin-bottom: 10px; cursor: pointer; font-weight: 300; transition: color .25s, padding-left .25s; }
+.footer-col li:hover { color: var(--terra); padding-left: 8px; }
+.footer-bottom { border-top: .5px solid var(--bege-d); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+.f-copy { font-size: 11px; color: #c0b0a0; font-weight: 300; }
+.f-legal { display: flex; gap: 20px; }
+.f-legal span { font-size: 11px; color: #c0b0a0; cursor: pointer; transition: color .2s; }
+.f-legal span:hover { color: var(--terra); }
+.to-top { position: fixed; bottom: 24px; left: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--escuro); color: var(--dourado); display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; z-index: 50; opacity: 0; transform: translateY(60px) scale(.6); transition: transform .4s var(--ease), opacity .3s, background .3s; box-shadow: 0 8px 20px rgba(44,24,16,.2); }
+.to-top.show { opacity: 1; transform: translateY(0) scale(1); }
+.to-top:hover { background: var(--terra); color: var(--creme); transform: translateY(-4px) scale(1.1); }
+
+@media (max-width: 960px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .page-hero { padding: 52px 24px; }
+  .page-hero h1 { font-size: 34px; }
+  .page-content { padding: 48px 24px; }
+  .footer { padding: 44px 24px 24px; text-align: center; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-col { display: flex; flex-direction: column; align-items: center; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+}
+
+.faq-intro { background: var(--creme); border-radius: 4px; padding: 28px 32px; margin-bottom: 48px; border-left: 3px solid var(--dourado); }
+.faq-intro p { font-family: var(--f-serif); font-size: 17px; font-style: italic; color: var(--escuro); line-height: 1.65; margin: 0; }
+
+.faq-cat { margin-bottom: 52px; }
+.faq-cat-title { display: flex; align-items: center; gap: 14px; font-family: var(--f-display); font-size: 10px; letter-spacing: .2em; color: var(--terra); margin-bottom: 20px; }
+.faq-cat-title::after { content: ''; flex: 1; height: .5px; background: var(--bege-d); }
+
+.faq-item { border-bottom: .5px solid var(--bege-d); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; cursor: pointer; gap: 16px; }
+.faq-q:hover .faq-q-text { color: var(--terra); }
+.faq-q-text { font-size: 15px; font-weight: 500; color: var(--escuro); line-height: 1.4; transition: color .2s; }
+.faq-icon { width: 22px; height: 22px; border: 1px solid var(--bege-d); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .3s var(--ease); color: var(--terra); }
+.faq-icon span { font-size: 16px; line-height: 1; transition: transform .35s var(--ease); display: block; }
+.faq-item.open .faq-icon { background: var(--terra); border-color: var(--terra); color: var(--creme); }
+.faq-item.open .faq-icon span { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .45s var(--ease-out); }
+.faq-item.open .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 0 22px; font-size: 14px; color: var(--cinza); line-height: 1.85; font-weight: 300; }
+.faq-a-inner strong { color: var(--escuro); font-weight: 500; }
+.faq-a-inner a { color: var(--terra); border-bottom: 1px solid var(--bege-d); transition: border-color .2s; }
+.faq-a-inner a:hover { border-color: var(--terra); }
+
+.faq-cta { background: var(--escuro); border-radius: 4px; padding: 48px; text-align: center; margin-top: 16px; position: relative; overflow: hidden; }
+.faq-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.07) 0%, transparent 70%); }
+.faq-cta h3 { font-family: var(--f-serif); font-size: 26px; font-weight: 400; color: var(--creme); margin-bottom: 10px; position: relative; }
+.faq-cta h3 em { font-style: italic; color: var(--dourado); }
+.faq-cta p { font-size: 13px; color: rgba(247,240,230,.5); margin-bottom: 28px; font-weight: 300; position: relative; }
+.faq-cta-btn { display: inline-block; background: var(--terra); color: var(--creme); font-size: 11px; letter-spacing: .14em; font-family: var(--f-display); padding: 14px 32px; transition: background .25s, transform .2s; position: relative; }
+.faq-cta-btn:hover { background: var(--dourado); color: var(--escuro); transform: translateY(-2px); }
+.faq-nav-links { display: flex; justify-content: center; gap: 28px; margin-top: 20px; position: relative; }
+.faq-nav-links a { font-size: 12px; color: rgba(247,240,230,.4); font-family: var(--f-display); letter-spacing: .08em; transition: color .2s; border-bottom: .5px solid rgba(196,149,106,.2); padding-bottom: 1px; }
+.faq-nav-links a:hover { color: var(--dourado); }
+
+</style>
+</head>
+<body>
+<div class="announce">
+  <div class="marquee-track">
+    <span>Frete grátis acima de R$ 99 <span class="marquee-sep">◆</span> <strong>Use RECANTE10 para 10% na primeira compra</strong> <span class="marquee-sep">◆</span> Entrega em até 12 dias <span class="marquee-sep">◆</span> Troca garantida 30 dias <span class="marquee-sep">◆</span> Parcelamento em 6x sem juros <span class="marquee-sep">◆</span></span>
+    <span>Frete grátis acima de R$ 99 <span class="marquee-sep">◆</span> <strong>Use RECANTE10 para 10% na primeira compra</strong> <span class="marquee-sep">◆</span> Entrega em até 12 dias <span class="marquee-sep">◆</span> Troca garantida 30 dias <span class="marquee-sep">◆</span> Parcelamento em 6x sem juros <span class="marquee-sep">◆</span></span>
+  </div>
+</div>
+<div class="scroll-progress" id="scroll-progress"></div>
+<nav class="nav" id="nav">
+  <a href="index.html" class="logo">
+    <div class="logo-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
+    <div class="logo-name">RECANTÉ</div>
+    <div class="logo-sub">CASA &amp; ORGANIZAÇÃO</div>
+  </a>
+  <ul class="nav-links">
+    <li class=""><a href="index.html">Início</a></li>
+    <li class=""><a href="#">Cozinha</a></li>
+    <li class=""><a href="#">Quarto</a></li>
+    <li class=""><a href="#">Banheiro</a></li>
+    <li class=""><a href="#">Escritório</a></li>
+    <li class=""><a href="#">Novidades</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn">Buscar</button>
+    <button class="nav-btn">Conta</button>
+    <button class="nav-btn cart-btn">Carrinho <span class="cart-count">0</span></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-orn reveal"><div class="ph-ln"></div><div class="ph-dm"></div><div class="ph-ln"></div></div>
+  <h1 class="reveal reveal-delay-1">Suas <em>dúvidas</em>,<br>respondidas com honestidade</h1>
+  <p class="reveal reveal-delay-2">Sem letra miúda. Sem enrolação. Só o que você precisa saber.</p>
+</div>
+
+<div class="page-content">
+
+  <div class="faq-intro reveal">
+    <p>"Posso confiar nessa loja? E se não chegar? E se vier diferente da foto?" — Sabemos que essas perguntas aparecem. Aqui está tudo que você precisa saber antes de comprar.</p>
+  </div>
+
+  <div class="faq-cat reveal">
+    <p class="faq-cat-title">Antes de comprar</p>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Posso confiar na Recanté? Nunca comprei aqui antes.</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Faz todo sentido ter essa dúvida. Confiança se constrói com transparência — não com promessas. O que fazemos: informamos o prazo real antes de você comprar, enviamos código de rastreamento assim que o pedido sai, e trocamos sem perguntas em até 30 dias. Se não ficar satisfeita, você não perde nada. <strong>Risco zero do seu lado.</strong></div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">O produto é igual ao da foto?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Sim. Usamos fotos reais dos produtos — sem filtros que distorcem cor ou tamanho. Antes de publicar qualquer produto, verificamos as especificações e comparamos com avaliações de compradoras reais. Se um produto começar a receber reclamações de que veio diferente da foto, ele sai do catálogo.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Quais formas de pagamento vocês aceitam?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Aceitamos <strong>Pix</strong> (aprovação imediata — pedido entra em processamento na hora), <strong>cartão de crédito em até 6x sem juros</strong> e boleto bancário. O Pix é a forma mais rápida para agilizar a entrega.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-cat reveal">
+    <p class="faq-cat-title">Entrega e rastreamento</p>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Quanto tempo leva para chegar?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">O prazo é de <strong>7 a 12 dias úteis</strong> para todo o Brasil após a confirmação do pagamento. Regiões metropolitanas costumam receber antes. O prazo exato aparece no checkout antes de você finalizar — sem surpresa depois.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Como sei que meu pedido saiu?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Você recebe um e-mail com o código de rastreamento assim que o pedido é despachado. Pode acompanhar pelo site dos Correios ou da transportadora. Qualquer dúvida, escreva para <a href="mailto:contato@recante.com.br">contato@recante.com.br</a> — respondemos em até 24h em dias úteis.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">O frete é grátis?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Sim, para compras acima de <strong>R$ 99 o frete é gratuito</strong> para todo o Brasil. Para compras abaixo desse valor, o frete é calculado automaticamente no checkout com base no seu CEP.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">E se o pedido demorar mais do que o prazo?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Entre em contato pelo e-mail contato@recante.com.br. Vamos rastrear o pedido e, se houver qualquer problema com a entrega, resolveremos com reenvio ou reembolso completo. Você não fica no prejuízo.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-cat reveal">
+    <p class="faq-cat-title">Trocas e devoluções</p>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">E se eu não gostar do produto quando chegar?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Você tem <strong>30 dias a partir do recebimento</strong> para solicitar troca ou devolução — sem precisar dar nenhuma explicação. É seu direito. Entre em contato pelo e-mail contato@recante.com.br com o número do pedido e te orientamos em cada passo. <a href="politica.html">Ver política de troca completa →</a></div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">O produto chegou com defeito. O que faço?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Lamentamos muito. Entre em contato em até 7 dias com fotos do produto e da embalagem pelo e-mail contato@recante.com.br. Resolveremos com <strong>reenvio ou reembolso total, sem nenhum custo para você</strong> — incluindo o frete de devolução.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Quando recebo meu dinheiro de volta?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Via Pix em <strong>1 a 2 dias úteis</strong> após a confirmação da devolução. No cartão de crédito, o estorno aparece em 1 a 2 faturas, conforme a operadora. Você fica sempre informada sobre cada etapa do processo.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-cat reveal">
+    <p class="faq-cat-title">Produtos e qualidade</p>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Os produtos são de boa qualidade?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Cada produto passa por uma curadoria rigorosa antes de entrar no catálogo. Analisamos centenas de avaliações reais, verificamos durabilidade e testamos se o produto resolve o problema que promete. Não vendemos tudo — só o que realmente funciona. <strong>Se um produto começa a receber reclamações, ele sai.</strong></div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Os produtos têm garantia?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Sim. Todos os produtos têm garantia mínima de <strong>90 dias contra defeitos de fabricação</strong>, conforme o Código de Defesa do Consumidor. Além disso, você pode trocar por qualquer motivo em até 30 dias do recebimento.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-text">Posso cancelar meu pedido?</span><div class="faq-icon"><span>+</span></div></div>
+      <div class="faq-a"><div class="faq-a-inner">Sim, pedidos podem ser cancelados em até 24 horas após a confirmação do pagamento, desde que ainda não tenham sido despachados. Entre em contato pelo e-mail contato@recante.com.br com o número do pedido.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-cta reveal-scale">
+    <h3>Ainda tem <em>dúvidas?</em></h3>
+    <p>Nossa equipe responde em até 24 horas em dias úteis. Sem bots, sem resposta automática.</p>
+    <a href="mailto:contato@recante.com.br" class="faq-cta-btn">Falar com a gente →</a>
+    <div class="faq-nav-links">
+      <a href="sobre.html">Sobre nós</a>
+      <a href="politica.html">Política de troca</a>
+      <a href="index.html">Ver produtos</a>
+    </div>
+  </div>
+
+</div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="f-brand">
+      <p class="f-logo">RECANTÉ</p>
+      <p class="f-logo-sub">CASA &amp; ORGANIZAÇÃO</p>
+      <p class="f-desc">Produtos de organização para transformar cada cantinho da sua casa. Qualidade garantida, entrega rápida, troca sem complicação.</p>
+    </div>
+    <div class="footer-col"><h4>A loja</h4><ul><li><a href="sobre.html">Sobre nós</a></li><li>Blog</li><li>Instagram</li><li><a href="mailto:contato@recante.com.br">Contato</a></li></ul></div>
+    <div class="footer-col"><h4>Ajuda</h4><ul><li><a href="politica.html">Política de troca</a></li><li>Prazo de entrega</li><li>Pagamentos</li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="footer-col"><h4>Categorias</h4><ul><li>Cozinha</li><li>Quarto</li><li>Banheiro</li><li>Escritório</li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="f-copy">© 2025 Recanté · recante.com.br</span>
+    <div class="f-legal"><span>Política de privacidade</span><span>Termos de uso</span></div>
+  </div>
+</footer>
+<button class="to-top" id="to-top">↑</button>
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  const prog = document.getElementById('scroll-progress');
+  const top = document.getElementById('to-top');
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  if(prog) prog.style.width = pct + '%';
+  if(nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  if(top) top.classList.toggle('show', window.scrollY > 400);
+});
+document.getElementById('to-top')?.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body>
+</html>
