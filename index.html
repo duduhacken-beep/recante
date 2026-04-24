@@ -1026,6 +1026,59 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
     transition-duration: .01ms !important;
   }
 }
+
+/* ── SEARCH MODAL ── */
+.search-overlay { position: fixed; inset: 0; background: rgba(44,24,16,.7); backdrop-filter: blur(8px); z-index: 500; opacity: 0; pointer-events: none; transition: opacity .3s; display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; }
+.search-overlay.open { opacity: 1; pointer-events: all; }
+.search-box { background: var(--branco); width: 100%; max-width: 640px; border-radius: 8px; overflow: hidden; transform: translateY(-20px); transition: transform .35s var(--ease-out); box-shadow: 0 32px 80px rgba(44,24,16,.25); }
+.search-overlay.open .search-box { transform: translateY(0); }
+.search-input-wrap { display: flex; align-items: center; gap: 14px; padding: 20px 24px; border-bottom: 1px solid var(--bege); }
+.search-icon { color: var(--dourado); font-size: 16px; flex-shrink: 0; }
+.search-input { flex: 1; border: none; outline: none; font-size: 18px; font-family: var(--f-body); color: var(--escuro); background: transparent; }
+.search-input::placeholder { color: var(--bege-d); }
+.search-close { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--bege-d); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--cinza); transition: all .2s; flex-shrink: 0; }
+.search-close:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+.search-results { max-height: 400px; overflow-y: auto; }
+.search-result-item { display: flex; align-items: center; gap: 16px; padding: 14px 24px; border-bottom: .5px solid var(--bege); cursor: pointer; transition: background .2s; }
+.search-result-item:hover { background: var(--creme); }
+.search-result-img { width: 44px; height: 44px; border-radius: 3px; background: var(--bege); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.search-result-name { font-size: 14px; font-weight: 500; color: var(--escuro); }
+.search-result-cat { font-size: 11px; color: var(--dourado); font-family: var(--f-display); letter-spacing: .08em; margin-top: 2px; }
+.search-result-price { font-size: 14px; font-weight: 600; color: var(--terra); margin-left: auto; }
+.search-empty { padding: 32px 24px; text-align: center; color: var(--cinza); font-size: 14px; font-weight: 300; font-style: italic; font-family: var(--f-serif); }
+.search-hint { padding: 16px 24px; font-size: 11px; color: var(--bege-d); letter-spacing: .06em; font-family: var(--f-display); }
+
+/* ── POPUP ── */
+.popup-overlay { position: fixed; inset: 0; background: rgba(44,24,16,.65); backdrop-filter: blur(6px); z-index: 600; opacity: 0; pointer-events: none; transition: opacity .4s; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.popup-overlay.open { opacity: 1; pointer-events: all; }
+.popup-box { background: var(--branco); width: 100%; max-width: 480px; border-radius: 4px; overflow: hidden; transform: scale(.92); transition: transform .4s var(--ease-out); box-shadow: 0 40px 100px rgba(44,24,16,.3); position: relative; }
+.popup-overlay.open .popup-box { transform: scale(1); }
+.popup-close { position: absolute; top: 14px; right: 16px; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--bege-d); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--cinza); z-index: 2; transition: all .2s; }
+.popup-close:hover { background: var(--terra); color: var(--creme); border-color: var(--terra); }
+.popup-top { background: var(--escuro); padding: 40px 36px 32px; text-align: center; position: relative; overflow: hidden; }
+.popup-top::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.1) 0%, transparent 70%); }
+.popup-orn { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px; position: relative; }
+.popup-orn .ln { width: 28px; height: .7px; background: var(--dourado); }
+.popup-orn .dm { width: 6px; height: 6px; background: var(--dourado); transform: rotate(45deg); }
+.popup-eyebrow { font-family: var(--f-display); font-size: 9px; letter-spacing: .22em; color: var(--dourado); margin-bottom: 12px; position: relative; }
+.popup-title { font-family: var(--f-serif); font-size: 32px; font-weight: 300; color: var(--creme); line-height: 1.2; position: relative; }
+.popup-title em { font-style: italic; color: var(--dourado); }
+.popup-subtitle { font-size: 13px; color: rgba(247,240,230,.5); font-weight: 300; margin-top: 10px; position: relative; }
+.popup-bottom { padding: 28px 36px; }
+.popup-form { display: flex; flex-direction: column; gap: 12px; }
+.popup-input { width: 100%; padding: 13px 16px; border: 1px solid var(--bege-d); border-radius: 3px; font-size: 14px; font-family: var(--f-body); color: var(--escuro); outline: none; transition: border-color .2s; }
+.popup-input:focus { border-color: var(--dourado); }
+.popup-input::placeholder { color: #ccc; }
+.popup-btn { background: var(--terra); color: var(--creme); padding: 14px; font-size: 11px; letter-spacing: .14em; font-family: var(--f-display); border: none; cursor: pointer; transition: background .25s; }
+.popup-btn:hover { background: var(--escuro); }
+.popup-skip { text-align: center; margin-top: 10px; font-size: 11px; color: var(--bege-d); cursor: pointer; font-style: italic; font-family: var(--f-serif); transition: color .2s; }
+.popup-skip:hover { color: var(--cinza); }
+.popup-success { padding: 48px 36px; text-align: center; display: none; }
+.popup-success h3 { font-family: var(--f-serif); font-size: 24px; font-weight: 400; color: var(--escuro); margin-bottom: 8px; }
+.popup-success h3 em { font-style: italic; color: var(--terra); }
+.popup-success p { font-size: 13px; color: var(--cinza); font-weight: 300; margin-bottom: 20px; }
+.popup-code { background: var(--creme); border: 1px dashed var(--dourado); padding: 12px 20px; font-family: var(--f-display); font-size: 18px; letter-spacing: .2em; color: var(--terra); border-radius: 3px; display: inline-block; }
+
 </style>
 </head>
 <body>
@@ -1076,7 +1129,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </ul>
   <div class="nav-actions">
     <button class="nav-btn">Buscar</button>
-    <button class="nav-btn">Conta</button>
+    <a href="https://recante.myshopify.com/account" target="_blank" style="text-decoration:none;"><button class="nav-btn">Conta</button></a>
     <button class="nav-btn cart-btn">
       Carrinho <span class="cart-count" id="cart-count">0</span>
     </button>
@@ -1158,13 +1211,13 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
 
 <!-- CATS -->
 <div class="cats-bar">
-  <div class="cat-pill active">Tudo</div>
-  <div class="cat-pill">Cozinha &amp; Despensa</div>
-  <div class="cat-pill">Quarto &amp; Closet</div>
-  <div class="cat-pill">Banheiro</div>
-  <div class="cat-pill">Sala &amp; Escritório</div>
-  <div class="cat-pill">Menos de R$ 50</div>
-  <div class="cat-pill">Lançamentos</div>
+  <div class="cat-pill active" data-filter="all">Tudo</div>
+  <div class="cat-pill" data-filter="cozinha,despensa">Cozinha &amp; Despensa</div>
+  <div class="cat-pill" data-filter="quarto">Quarto &amp; Closet</div>
+  <div class="cat-pill" data-filter="banheiro">Banheiro</div>
+  <div class="cat-pill" data-filter="sala">Sala &amp; Escritório</div>
+  <div class="cat-pill" data-filter="ate50">Menos de R$ 50</div>
+  <div class="cat-pill" data-filter="lancamento">Lançamentos</div>
 </div>
 
 <!-- PRODUCTS -->
@@ -1175,7 +1228,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </div>
   <div class="prods">
 
-    <div class="prod-card reveal" data-tilt>
+    <div class="prod-card reveal" data-tilt data-category="cozinha" onclick="goToProduct('organizador-gaveta')" style="cursor:pointer;">
       <div class="prod-img" style="background:#fdf0e8;">
         <span class="prod-tag tag-new">Mais vendido</span>
         <div class="prod-overlay">Ver produto</div>
@@ -1183,25 +1236,25 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </div>
       <div class="prod-body">
         <p class="prod-cat">Cozinha</p>
-        <p class="prod-name">Organizador de gaveta modular</p>
+        <p class="prod-name">Organizador de gaveta — fim da bagunça de vez</p>
         <div class="stars">
           <div class="star"></div><div class="star"></div><div class="star"></div>
           <div class="star"></div><div class="star"></div>
           <span class="star-count">(87)</span>
         </div>
         <div class="prod-fomo">
-          <div class="fomo"><div class="fomo-dot"></div>12 pessoas viram hoje</div>
+          <div class="fomo"><div class="fomo-dot"></div>47 pessoas viram hoje</div>
         </div>
         <div class="prod-price-row">
           <span class="prod-price">R$ 49,90</span>
         </div>
       </div>
-      <button class="prod-add" data-ripple onclick="addToCart(event, this, 'Organizador de gaveta')">
+      <button class="prod-add" data-ripple onclick="event.stopPropagation(); addToCart(event, this, 'Organizador de gaveta')">
         <span>Adicionar ao carrinho</span><span>+</span>
       </button>
     </div>
 
-    <div class="prod-card reveal reveal-delay-1" data-tilt>
+    <div class="prod-card reveal reveal-delay-1" data-tilt data-category="despensa" onclick="goToProduct('porta-temperos')" style="cursor:pointer;">
       <div class="prod-img" style="background:#f5efe8;">
         <span class="prod-tag tag-off">−20%</span>
         <div class="prod-overlay">Ver produto</div>
@@ -1209,40 +1262,40 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </div>
       <div class="prod-body">
         <p class="prod-cat">Despensa</p>
-        <p class="prod-name">Porta-temperos magnético inox</p>
+        <p class="prod-name">Porta-temperos magnético — despensa que impressiona</p>
         <div class="stars">
           <div class="star"></div><div class="star"></div><div class="star"></div>
           <div class="star"></div><div class="star"></div>
           <span class="star-count">(53)</span>
         </div>
         <div class="prod-fomo">
-          <div class="fomo"><div class="fomo-dot"></div>Últimas 8 unidades</div>
+          <div class="fomo"><div class="fomo-dot"></div>Últimas 3 unidades</div>
         </div>
         <div class="prod-price-row">
           <span class="prod-price">R$ 59,90</span>
           <span class="prod-price-old">R$ 74,90</span>
         </div>
       </div>
-      <button class="prod-add" data-ripple onclick="addToCart(event, this, 'Porta-temperos magnético')">
+      <button class="prod-add" data-ripple onclick="event.stopPropagation(); addToCart(event, this, 'Porta-temperos magnético')">
         <span>Adicionar ao carrinho</span><span>+</span>
       </button>
     </div>
 
-    <div class="prod-card reveal reveal-delay-2" data-tilt>
+    <div class="prod-card reveal reveal-delay-2" data-tilt data-category="multiuso" onclick="goToProduct('ganchos-adesivos')" style="cursor:pointer;">
       <div class="prod-img" style="background:#fdf8f4;">
         <div class="prod-overlay">Ver produto</div>
         <div style="width:90px;height:50px;background:#e0cdb0;border-radius:2px;"></div>
       </div>
       <div class="prod-body">
         <p class="prod-cat">Multiuso</p>
-        <p class="prod-name">Ganchos adesivos premium 6 unidades</p>
+        <p class="prod-name">Ganchos adesivos — um lugar para tudo</p>
         <div class="stars">
           <div class="star"></div><div class="star"></div><div class="star"></div>
           <div class="star"></div><div class="star"></div>
           <span class="star-count">(124)</span>
         </div>
         <div class="prod-fomo">
-          <div class="fomo"><div class="fomo-dot"></div>5 comprados hoje</div>
+          <div class="fomo"><div class="fomo-dot"></div>23 comprados hoje</div>
         </div>
         <div class="prod-price-row">
           <span class="prod-price">R$ 34,90</span>
@@ -1449,8 +1502,8 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   <div class="footer-bottom">
     <span class="f-copy">© 2025 Recanté · recante.com.br</span>
     <div class="f-legal">
-      <span>Política de privacidade</span>
-      <span>Termos de uso</span>
+      <a href="privacidade.html" style="color:inherit;text-decoration:none;">Política de privacidade</a>
+      <a href="termos.html" style="color:inherit;text-decoration:none;">Termos de uso</a>
     </div>
   </div>
 </footer>
@@ -1646,5 +1699,142 @@ document.querySelectorAll('.btn-primary').forEach(btn => {
   });
 });
 </script>
+
+<!-- SEARCH MODAL -->
+<div class="search-overlay" id="search-overlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="search-input" type="text" placeholder="O que você está procurando?">
+      <div class="search-close" onclick="closeSearch()">×</div>
+    </div>
+    <div id="search-results" class="search-results">
+      <p class="search-hint">Sugestões populares: organizador · gaveta · ganchos · temperos</p>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP DESCONTO -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-close" onclick="closePopup()">×</div>
+    <div class="popup-top">
+      <div class="popup-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
+      <p class="popup-eyebrow">Bem-vinda à Recanté</p>
+      <h2 class="popup-title">10% de desconto<br><em>na primeira compra</em></h2>
+      <p class="popup-subtitle">Para você que vai transformar sua casa de vez</p>
+    </div>
+    <div class="popup-bottom">
+      <div id="popup-form-wrap" class="popup-form">
+        <input class="popup-input" id="popup-email" type="email" placeholder="Seu melhor e-mail">
+        <button class="popup-btn" onclick="submitPopup()">Quero meu desconto →</button>
+      </div>
+      <p class="popup-skip" onclick="closePopup()">Não, obrigada — prefiro pagar o preço cheio</p>
+    </div>
+    <div class="popup-success" id="popup-success">
+      <h3>Desconto <em>garantido!</em></h3>
+      <p>Use o código abaixo na sua primeira compra:</p>
+      <div class="popup-code">RECANTE10</div>
+      <p style="margin-top:16px;font-size:12px;color:#bbb;">Válido por 48 horas · Compras acima de R$ 49,90</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PRODUCTS DATABASE (expandir conforme novos produtos) ──
+const PRODUCTS = [
+  { name: 'Organizador de gaveta — fim da bagunça de vez', cat: 'Cozinha', price: 'R$ 49,90', id: 'organizador-gaveta', bg: '#c4a882' },
+  { name: 'Porta-temperos magnético — despensa que impressiona', cat: 'Despensa', price: 'R$ 59,90', id: 'porta-temperos', bg: '#8B4A2A' },
+  { name: 'Ganchos adesivos — um lugar para tudo', cat: 'Multiuso', price: 'R$ 34,90', id: 'ganchos-adesivos', bg: '#e0cdb0' },
+];
+
+// ── SEARCH ──
+function openSearch() {
+  document.getElementById('search-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('search-input').focus(), 100);
+}
+function closeSearch() {
+  document.getElementById('search-overlay').classList.remove('open');
+  document.getElementById('search-input').value = '';
+  renderSearchResults('');
+}
+function renderSearchResults(query) {
+  const container = document.getElementById('search-results');
+  if (!query.trim()) {
+    container.innerHTML = '<p class="search-hint">Sugestões: organizador · gaveta · ganchos · temperos</p>';
+    return;
+  }
+  const q = query.toLowerCase();
+  const results = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q));
+  if (!results.length) {
+    container.innerHTML = '<p class="search-empty">Nenhum produto encontrado para "' + query + '"</p>';
+    return;
+  }
+  container.innerHTML = results.map(p => `
+    <div class="search-result-item" onclick="goToProduct('${p.id}')">
+      <div class="search-result-img"><div style="width:28px;height:32px;background:${p.bg};border-radius:2px;"></div></div>
+      <div><p class="search-result-name">${p.name}</p><p class="search-result-cat">${p.cat}</p></div>
+      <span class="search-result-price">${p.price}</span>
+    </div>`).join('');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('search-input');
+  if (input) input.addEventListener('input', e => renderSearchResults(e.target.value));
+  // Wire search button
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    if (btn.textContent.trim() === 'Buscar') btn.addEventListener('click', openSearch);
+  });
+});
+document.getElementById('search-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeSearch();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+// ── CATEGORY FILTER ──
+document.querySelectorAll('.cat-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.dataset.filter;
+    document.querySelectorAll('.prod-card').forEach(card => {
+      if (filter === 'all') { card.style.display = ''; return; }
+      const cat = (card.dataset.category || '').toLowerCase();
+      const filters = filter.split(',');
+      card.style.display = filters.some(f => cat.includes(f)) ? '' : 'none';
+    });
+  });
+});
+
+// ── PRODUCT PAGE NAVIGATION ──
+function goToProduct(id) { window.location.href = 'produto.html?id=' + id; }
+
+// ── POPUP ──
+function openPopup() {
+  if (localStorage.getItem('recante_popup_seen')) return;
+  document.getElementById('popup-overlay').classList.add('open');
+}
+function closePopup() {
+  document.getElementById('popup-overlay').classList.remove('open');
+  localStorage.setItem('recante_popup_seen', '1');
+}
+function submitPopup() {
+  const email = document.getElementById('popup-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('popup-email').style.borderColor = '#e05555';
+    return;
+  }
+  document.getElementById('popup-form-wrap').style.display = 'none';
+  document.querySelector('.popup-skip').style.display = 'none';
+  document.getElementById('popup-success').style.display = 'block';
+  localStorage.setItem('recante_popup_seen', '1');
+  // Aqui conectar ao e-mail marketing (Klaviyo, Mailchimp, etc.)
+}
+// Mostrar popup após 12 segundos (pesquisa: 11-15s = maior conversão)
+setTimeout(() => openPopup(), 12000);
+document.getElementById('popup-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closePopup();
+});
+</script>
+
 </body>
 </html>
