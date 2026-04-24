@@ -263,6 +263,10 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   .toolbar-search { width: 140px; }
 }
 
+
+/* Legal links footer */
+.legal-link { font-size: 11px; color: #c0b0a0; transition: color .2s; text-decoration: none; }
+.legal-link:hover { color: var(--terra); }
 </style>
 </head>
 <body>
@@ -321,16 +325,6 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </div>
 </div>
 
-<!-- FILTER BAR (categoria) -->
-<div class="filter-bar">
-  <button class="filter-pill active" data-filter="all">Tudo</button>
-  <button class="filter-pill" data-filter="cozinha">Cozinha &amp; Despensa</button>
-  <button class="filter-pill" data-filter="quarto">Quarto &amp; Closet</button>
-  <button class="filter-pill" data-filter="banheiro">Banheiro</button>
-  <button class="filter-pill" data-filter="sala">Sala &amp; Escritório</button>
-  <button class="filter-pill" data-filter="multiuso">Multiuso</button>
-  <button class="filter-pill" data-filter="ate50">Menos de R$ 50</button>
-</div>
 
 <!-- TOOLBAR -->
 <div class="catalog-toolbar">
@@ -584,8 +578,8 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   <div class="footer-bottom">
     <span class="f-copy">© 2025 Recanté · recante.com.br</span>
     <div class="f-legal">
-      <a href="privacidade.html" style="color:#c0b0a0;transition:color .2s;">Política de privacidade</a>
-      <a href="termos.html" style="color:#c0b0a0;transition:color .2s;">Termos de uso</a>
+      <a href="privacidade.html" class="legal-link">Política de privacidade</a>
+      <a href="termos.html" class="legal-link">Termos de uso</a>
     </div>
   </div>
 </footer>

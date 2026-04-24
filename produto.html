@@ -239,6 +239,10 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   .related-grid { grid-template-columns: 1fr; }
 }
 
+
+/* Legal links footer */
+.legal-link { font-size: 11px; color: #c0b0a0; transition: color .2s; text-decoration: none; }
+.legal-link:hover { color: var(--terra); }
 </style>
 </head>
 <body>
@@ -449,7 +453,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </div>
   <div class="footer-bottom">
     <span class="f-copy">© 2025 Recanté · recante.com.br</span>
-    <div class="f-legal"><span>Política de privacidade</span><span>Termos de uso</span></div>
+    <div class="f-legal"><a href="privacidade.html" class="legal-link">Política de privacidade</a><a href="termos.html" class="legal-link">Termos de uso</a></div>
   </div>
 </footer>
 <button class="to-top" id="to-top">↑</button>
