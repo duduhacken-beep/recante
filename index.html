@@ -1122,9 +1122,9 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   <div class="hero-text">
     <div class="hero-eyebrow">Nova coleção — outono 2025</div>
     <h1 class="hero-h1" id="hero-h1">
-      <span data-split="Organização que"></span><br>
-      <span data-split="transforma sua"></span><br>
-      <em><span data-split="rotina em casa"></span></em>
+      Cansada de abrir<br>
+      a gaveta e não<br>
+      <em>encontrar nada?</em>
     </h1>
     <p class="hero-p">
       Produtos práticos e bonitos para cada cantinho da sua casa.
@@ -1548,17 +1548,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
 
 <script>
 /* ── SPLIT TEXT (letter-by-letter reveal in hero) ── */
-document.querySelectorAll('[data-split]').forEach((el, ei) => {
-  const text = el.getAttribute('data-split');
-  el.textContent = '';
-  [...text].forEach((ch, i) => {
-    const s = document.createElement('span');
-    s.className = 'split-char';
-    s.textContent = ch === ' ' ? '\u00A0' : ch;
-    s.style.animationDelay = (0.3 + ei * 0.2 + i * 0.03) + 's';
-    el.appendChild(s);
-  });
-});
+// text rendered directly
 
 /* ── SCROLL REVEAL ── */
 const observer = new IntersectionObserver((entries) => {
@@ -1713,9 +1703,7 @@ function addToCart(evt, btn, productName) {
   }, 1800);
 }
 
-/* ── CAT PILLS ── */
-document.querySelectorAll(');
-});
+/* cat pills removed */
 
 /* ── MAGNETIC CTA (subtle magnetic pull on primary button) ── */
 document.querySelectorAll('.btn-primary').forEach(btn => {
@@ -1764,8 +1752,11 @@ function renderSearchResults(query) {
     return;
   }
   container.innerHTML = results.map(p =>
-    '<div class="search-result-item" onclick="window.location.href=\'produto.html?id=' + p.id + '\'"><div class="search-result-img"><div style="width:28px;height:34px;background:' + p.bg + ';border-radius:2px;"></div></div><div><p class="search-result-name">' + p.name + '</p><p class="search-result-cat">' + p.cat + '</p></div><span class="search-result-price">' + p.price + '</span></div>'
+    '<div class="search-result-item" data-id="' + p.id + '" style="cursor:pointer;"><div class="search-result-img"><div style="width:28px;height:34px;background:' + p.bg + ';border-radius:2px;"></div></div><div><p class="search-result-name">' + p.name + '</p><p class="search-result-cat">' + p.cat + '</p></div><span class="search-result-price">' + p.price + '</span></div>'
   ).join('');
+  container.querySelectorAll('.search-result-item').forEach(function(el) {
+    el.addEventListener('click', function() { window.location.href = 'produto.html?id=' + el.dataset.id; });
+  });
 }
 document.addEventListener('DOMContentLoaded', function() {
   var input = document.getElementById('search-input');
