@@ -568,26 +568,13 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
 .proof-sep { width: 1px; height: 32px; background: rgba(196,149,106,.2); }
 
 /* ── CATS BAR ── */
-.cats-bar { display: flex; overflow-x: auto; background: var(--branco); border-bottom: 1px solid var(--bege); scrollbar-width: none; }
+
 .cats-bar::-webkit-scrollbar { display: none; }
-.cat-pill {
-  padding: 16px 28px; font-size: 11px; letter-spacing: .06em;
-  color: var(--cinza); cursor: pointer; white-space: nowrap;
-  border-bottom: 2px solid transparent;
-  transition: all .3s var(--ease-out);
-  position: relative;
-}
-.cat-pill::before {
-  content: '';
-  position: absolute;
-  left: 50%; bottom: 0;
-  width: 0; height: 2px;
-  background: var(--terra);
-  transition: width .35s var(--ease-out), left .35s var(--ease-out);
-}
-.cat-pill:hover { color: var(--terra); transform: translateY(-2px); }
-.cat-pill.active { color: var(--terra); font-weight: 500; }
-.cat-pill.active::before, .cat-pill:hover::before { width: 60%; left: 20%; }
+
+
+
+
+
 
 /* ── SECTION ── */
 .section { padding: 64px 48px; }
@@ -1198,15 +1185,6 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </div>
 </div>
 
-<!-- CATS -->
-
-  <div class="cat-pill">Cozinha &amp; Despensa</div>
-  <div class="cat-pill">Quarto &amp; Closet</div>
-  <div class="cat-pill">Banheiro</div>
-  <div class="cat-pill">Sala &amp; Escritório</div>
-  <div class="cat-pill">Menos de R$ 50</div>
-  <div class="cat-pill">Lançamentos</div>
-</div>
 
 <!-- PRODUCTS -->
 <section class="section" id="produtos-section" style="background:#fff;">
@@ -1736,11 +1714,7 @@ function addToCart(evt, btn, productName) {
 }
 
 /* ── CAT PILLS ── */
-document.querySelectorAll('.cat-pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  });
+document.querySelectorAll(');
 });
 
 /* ── MAGNETIC CTA (subtle magnetic pull on primary button) ── */
