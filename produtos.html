@@ -286,22 +286,22 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   </div>
 </div><div class="scroll-progress" id="scroll-progress"></div>
 <nav class="nav" id="nav">
-  <a href="/" class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
     <div class="logo-name">RECANTÉ</div>
     <div class="logo-sub">CASA &amp; ORGANIZAÇÃO</div>
   </a>
-  <ul class="nav-links">
-    <li><a href="/" style="color:inherit;">Início</a></li>
-    <li>Cozinha</li>
-    <li>Quarto</li>
-    <li>Banheiro</li>
-    <li>Novidades</li>
+    <ul class="nav-links">
+    <li><a href="index.html" style="color:inherit;">Início</a></li>
+    <li><a href="produtos.html" style="color:inherit;">Produtos</a></li>
+    <li><a href="sobre.html" style="color:inherit;">Sobre</a></li>
+    <li><a href="faq.html" style="color:inherit;">FAQ</a></li>
+    <li><a href="contato.html" style="color:inherit;">Contato</a></li>
   </ul>
   <div class="nav-actions">
     <button class="nav-btn" id="search-btn">Buscar</button>
-    <a href="https://recante.myshopify.com/account" target="_blank"><button class="nav-btn">Conta</button></a>
-    <button class="nav-btn cart-btn">Carrinho <span class="cart-count" id="cart-count">0</span></button>
+    <a href="https://recante.myshopify.com/account" target="_blank" style="text-decoration:none;"><button class="nav-btn" style="cursor:pointer;">Conta</button></a>
+    <button class="nav-btn cart-btn" style="cursor:pointer;" onclick="window.location.href='https://recante.myshopify.com/cart'">Carrinho <span class="cart-count" id="cart-count">0</span></button>
   </div>
 </nav>
 <!-- CATALOG HEADER -->
@@ -390,7 +390,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   <div class="catalog-products">
     <div class="products-grid" id="products-grid">
 
-    <div class="prod-card reveal" data-category="cozinha" data-price="49.9" data-stars="87" onclick="window.location.href='/produto.html?id=organizador-gaveta'">
+    <div class="prod-card reveal" data-category="cozinha" data-price="49.9" data-stars="87" onclick="window.location.href='produto.html?id=organizador-gaveta'">
       <div class="prod-img" style="background:#fdf0e8;">
         <span class="prod-tag tag-new">Mais vendido</span>
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -414,7 +414,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </button>
     </div>
 
-    <div class="prod-card reveal" data-category="cozinha" data-price="59.9" data-stars="53" onclick="window.location.href='/produto.html?id=porta-temperos'">
+    <div class="prod-card reveal" data-category="cozinha" data-price="59.9" data-stars="53" onclick="window.location.href='produto.html?id=porta-temperos'">
       <div class="prod-img" style="background:#f5efe8;">
         <span class="prod-tag tag-off">−20%</span>
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -438,7 +438,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </button>
     </div>
 
-    <div class="prod-card reveal" data-category="multiuso" data-price="34.9" data-stars="124" onclick="window.location.href='/produto.html?id=ganchos-adesivos'">
+    <div class="prod-card reveal" data-category="multiuso" data-price="34.9" data-stars="124" onclick="window.location.href='produto.html?id=ganchos-adesivos'">
       <div class="prod-img" style="background:#fdf8f4;">
         
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -462,7 +462,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </button>
     </div>
 
-    <div class="prod-card reveal" data-category="quarto" data-price="64.9" data-stars="41" onclick="window.location.href='/produto.html?id=caixa-organizadora'">
+    <div class="prod-card reveal" data-category="quarto" data-price="64.9" data-stars="41" onclick="window.location.href='produto.html?id=caixa-organizadora'">
       <div class="prod-img" style="background:#f0ede8;">
         <span class="prod-tag tag-new">Novo</span>
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -486,7 +486,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </button>
     </div>
 
-    <div class="prod-card reveal" data-category="sala" data-price="44.9" data-stars="35" onclick="window.location.href='/produto.html?id=suporte-parede'">
+    <div class="prod-card reveal" data-category="sala" data-price="44.9" data-stars="35" onclick="window.location.href='produto.html?id=suporte-parede'">
       <div class="prod-img" style="background:#f5f0eb;">
         
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -510,7 +510,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       </button>
     </div>
 
-    <div class="prod-card reveal" data-category="banheiro" data-price="39.9" data-stars="67" onclick="window.location.href='/produto.html?id=organizador-banheiro'">
+    <div class="prod-card reveal" data-category="banheiro" data-price="39.9" data-stars="67" onclick="window.location.href='produto.html?id=organizador-banheiro'">
       <div class="prod-img" style="background:#edf3f0;">
         <span class="prod-tag tag-hot">Em alta</span>
         <div class="prod-overlay"><span>Ver produto</span></div>
@@ -557,35 +557,35 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
     <div class="footer-col">
       <h4>A loja</h4>
       <ul>
-        <li><a href="/sobre.html">Sobre nós</a></li>
-        <li><a href="/contato.html">Contato</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+        <li><a href="contato.html">Contato</a></li>
         <li><a href="https://instagram.com/recante" target="_blank">Instagram</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Ajuda</h4>
       <ul>
-        <li><a href="/politica.html">Política de troca</a></li>
-        <li><a href="/faq.html">Prazo de entrega</a></li>
-        <li><a href="/faq.html">Pagamentos</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="politica.html">Política de troca</a></li>
+        <li><a href="faq.html">Prazo de entrega</a></li>
+        <li><a href="faq.html">Pagamentos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Categorias</h4>
       <ul>
-        <li><a href="/">Cozinha</a></li>
-        <li><a href="/">Quarto</a></li>
-        <li><a href="/">Banheiro</a></li>
-        <li><a href="/">Escritório</a></li>
+        <li><a href="index.html">Cozinha</a></li>
+        <li><a href="index.html">Quarto</a></li>
+        <li><a href="index.html">Banheiro</a></li>
+        <li><a href="index.html">Escritório</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="f-copy">© 2025 Recanté · recante.com.br</span>
     <div class="f-legal">
-      <a href="/privacidade.html">Política de privacidade</a>
-      <a href="/termos.html">Termos de uso</a>
+      <a href="privacidade.html" style="color:#c0b0a0;transition:color .2s;">Política de privacidade</a>
+      <a href="termos.html" style="color:#c0b0a0;transition:color .2s;">Termos de uso</a>
     </div>
   </div>
 </footer>
