@@ -250,13 +250,13 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
 </div>
 <div class="scroll-progress" id="scroll-progress"></div>
 <nav class="nav" id="nav">
-  <a href="index.html" class="logo">
+  <a href="/" class="logo">
     <div class="logo-orn"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
     <div class="logo-name">RECANTÉ</div>
     <div class="logo-sub">CASA &amp; ORGANIZAÇÃO</div>
   </a>
   <ul class="nav-links">
-    <li class=""><a href="index.html">Início</a></li>
+    <li class=""><a href="/">Início</a></li>
     <li class=""><a href="#">Cozinha</a></li>
     <li class=""><a href="#">Quarto</a></li>
     <li class=""><a href="#">Banheiro</a></li>
@@ -266,13 +266,13 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
   <div class="nav-actions">
     <button class="nav-btn">Buscar</button>
     <button class="nav-btn">Conta</button>
-    <button class="nav-btn cart-btn">Carrinho <span class="cart-count">0</span></button>
+    <button class="nav-btn cart-btn" onclick="window.location.href='https://recante.myshopify.com/cart'">Carrinho <span class="cart-count">0</span></button>
   </div>
 </nav>
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <a href="index.html">Início</a>
+  <a href="/">Início</a>
   <span>›</span>
   <span id="breadcrumb-cat">Cozinha</span>
   <span>›</span>
@@ -410,7 +410,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
     <h2 class="sec-title">Quem viu este produto também <em>gostou</em></h2>
   </div>
   <div class="related-grid">
-    <div class="related-card reveal" onclick="window.location.href='produto.html?id=porta-temperos'">
+    <div class="related-card reveal" onclick="window.location.href='/produto.html?id=porta-temperos'">
       <div class="related-img"><div style="width:70px;height:50px;background:#8B4A2A;border-radius:2px;opacity:.75;"></div></div>
       <div class="related-body">
         <p class="related-cat">Despensa</p>
@@ -418,7 +418,7 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
         <span class="related-price">R$ 59,90</span>
       </div>
     </div>
-    <div class="related-card reveal reveal-delay-1" onclick="window.location.href='produto.html?id=ganchos-adesivos'">
+    <div class="related-card reveal reveal-delay-1" onclick="window.location.href='/produto.html?id=ganchos-adesivos'">
       <div class="related-img"><div style="width:80px;height:44px;background:#e0cdb0;border-radius:2px;"></div></div>
       <div class="related-body">
         <p class="related-cat">Multiuso</p>
@@ -444,8 +444,8 @@ body { font-family: var(--f-body); background: var(--branco); color: var(--escur
       <p class="f-logo-sub">CASA &amp; ORGANIZAÇÃO</p>
       <p class="f-desc">Produtos de organização para transformar cada cantinho da sua casa. Qualidade garantida, entrega rápida, troca sem complicação.</p>
     </div>
-    <div class="footer-col"><h4>A loja</h4><ul><li><a href="sobre.html">Sobre nós</a></li><li>Blog</li><li>Instagram</li><li><a href="mailto:contato@recante.com.br">Contato</a></li></ul></div>
-    <div class="footer-col"><h4>Ajuda</h4><ul><li><a href="politica.html">Política de troca</a></li><li>Prazo de entrega</li><li>Pagamentos</li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="footer-col"><h4>A loja</h4><ul><li><a href="/sobre.html">Sobre nós</a></li><li>Blog</li><li>Instagram</li><li><a href="mailto:contato@recante.com.br">Contato</a></li></ul></div>
+    <div class="footer-col"><h4>Ajuda</h4><ul><li><a href="/politica.html">Política de troca</a></li><li>Prazo de entrega</li><li>Pagamentos</li><li><a href="/faq.html">FAQ</a></li></ul></div>
     <div class="footer-col"><h4>Categorias</h4><ul><li>Cozinha</li><li>Quarto</li><li>Banheiro</li><li>Escritório</li></ul></div>
   </div>
   <div class="footer-bottom">
@@ -514,8 +514,8 @@ function loadProduct() {
   }
 }
 
-function comprarAgora() { alert('Shopify Buy Button — integrar aqui'); }
-function addToCartProd() { alert('Adicionar ao carrinho — integrar aqui'); }
+function comprarAgora() { window.location.href = 'https://recante.myshopify.com/cart'; }
+function addToCartProd() { window.location.href = 'https://recante.myshopify.com/cart'; }
 
 loadProduct();
 </script>
